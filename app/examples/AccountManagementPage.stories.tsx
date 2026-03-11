@@ -20,7 +20,8 @@ type Story = StoryObj<typeof meta>;
  * Account management landing page with subscription summary, upgrade prompts,
  * and grouped account actions based on the new Figma design.
  */
-export const CoreMonthly: Story = {
+export const Default: Story = {
+  name: "Core Monthly",
   args: {
     variant: "core-monthly",
   },
