@@ -435,6 +435,10 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .heroCards:not(.heroCardsSingle) .promoCard {
+    min-height: 304px;
+  }
+
   .footerMeta {
     align-items: flex-start;
     flex-direction: column;
