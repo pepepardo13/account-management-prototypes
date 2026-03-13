@@ -98,7 +98,7 @@ function PromoCardView({ card }: { card: PromoCard }) {
     <article
       className={`${styles["promoCard"]} ${
         card.emphasized ? styles["promoCardPrimary"] : ""
-      }`}
+      } ${!card.usage ? styles["promoCardBottomAlignedActions"] : ""}`}
     >
       <h2 className={styles["cardTitle"]}>{card.title}</h2>
 
