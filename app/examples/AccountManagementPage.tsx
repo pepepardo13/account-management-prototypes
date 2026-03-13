@@ -540,18 +540,18 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
             className={`${styles["heroInner"]} ${
               isAnnualVariant ? styles["annualHeroInner"] : ""
             } ${
-              isPlusMonthlyVariant || isUltimateMonthlyVariant
-                ? styles["compactMonthlyHeroInner"]
-                : ""
+              isPlusMonthlyVariant ? styles["plusMonthlyHeroInner"] : ""
+            } ${
+              isUltimateMonthlyVariant ? styles["ultimateMonthlyHeroInner"] : ""
             }`}
           >
             <div
               className={`${styles["planSummary"]} ${
                 hasSingleAnnualHeroCard ? styles["annualPlanSummary"] : ""
               } ${
-                isPlusMonthlyVariant || isUltimateMonthlyVariant
-                  ? styles["compactMonthlyPlanSummary"]
-                  : ""
+                isPlusMonthlyVariant ? styles["plusMonthlyPlanSummary"] : ""
+              } ${
+                isUltimateMonthlyVariant ? styles["ultimateMonthlyPlanSummary"] : ""
               }`}
             >
               <p className={styles["eyebrow"]}>Current Plan</p>

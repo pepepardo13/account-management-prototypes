@@ -72,7 +72,14 @@
   max-width: 1032px;
 }
 
-.compactMonthlyHeroInner {
+.plusMonthlyHeroInner {
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+  max-width: 1116px;
+}
+
+.ultimateMonthlyHeroInner {
   align-items: center;
   gap: 56px;
   justify-content: center;
@@ -93,7 +100,12 @@
   max-width: 643px;
 }
 
-.compactMonthlyPlanSummary {
+.plusMonthlyPlanSummary {
+  flex: 0 0 352px;
+  max-width: 352px;
+}
+
+.ultimateMonthlyPlanSummary {
   flex: 0 0 384px;
   max-width: 384px;
 }
@@ -103,7 +115,12 @@
   width: 349px;
 }
 
-.compactMonthlyHeroInner .heroCardsSingle {
+.plusMonthlyHeroInner .heroCardsSingle {
+  flex: 0 0 349px;
+  width: 349px;
+}
+
+.ultimateMonthlyHeroInner .heroCardsSingle {
   flex: 0 0 280px;
   width: 280px;
 }
@@ -360,7 +377,7 @@
 .plusMonthlyHeroCards {
   align-self: center;
   gap: 20px;
-  grid-template-columns: repeat(2, 244px);
+  grid-template-columns: repeat(2, 349px);
 }
 
 .ultimateMonthlyHeroCards {
@@ -370,7 +387,7 @@
 }
 
 .plusMonthlyHeroCards.heroCardsSingle {
-  grid-template-columns: 280px;
+  grid-template-columns: 349px;
 }
 
 .ultimateMonthlyHeroCards.heroCardsSingle {
@@ -828,12 +845,18 @@
     flex-direction: column;
   }
 
-  .compactMonthlyHeroInner {
+  .plusMonthlyHeroInner {
+    gap: 32px;
+    max-width: 736px;
+  }
+
+  .ultimateMonthlyHeroInner {
     gap: 32px;
     max-width: 508px;
   }
 
-  .compactMonthlyPlanSummary {
+  .plusMonthlyPlanSummary,
+  .ultimateMonthlyPlanSummary {
     flex: 1 1 auto;
     max-width: 640px;
   }
@@ -844,12 +867,12 @@
 
   .plusMonthlyHeroCards,
   .ultimateMonthlyHeroCards {
-    grid-template-columns: repeat(2, 244px);
+    grid-template-columns: repeat(2, minmax(280px, 349px));
   }
 
   .plusMonthlyHeroCards.heroCardsSingle,
   .ultimateMonthlyHeroCards.heroCardsSingle {
-    grid-template-columns: 280px;
+    grid-template-columns: minmax(280px, 349px);
   }
 }
 
