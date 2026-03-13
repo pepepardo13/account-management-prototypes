@@ -105,7 +105,6 @@ function PromoCardView({ card }: { card: PromoCard }) {
         <div className={styles["usageMeter"]}>
           <div className={styles["usageMeta"]}>
             <strong>{remainingGenerations} Generations remaining</strong>
-            <Icon name="chevron-down" size="1x" />
           </div>
           <div className={styles["progressTrack"]}>
             <div
