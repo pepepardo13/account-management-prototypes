@@ -253,9 +253,8 @@
 
 .coreAnnualHeroCards .promoCard {
   gap: 24px;
-  height: 416px;
-  max-height: 416px;
-  min-height: 416px;
+  height: auto;
+  max-height: none;
   padding: 24px;
 }
 
