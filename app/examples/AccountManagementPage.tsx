@@ -89,6 +89,10 @@ function ActionItem({ action }: { action: ActionLink }) {
 }
 
 function PromoCardView({ card }: { card: PromoCard }) {
+  const remainingGenerations = card.usage
+    ? Math.max(Number(card.usage.total) - Number(card.usage.current), 0)
+    : 0;
+
   return (
     <article
       className={`${styles["promoCard"]} ${
@@ -100,16 +104,14 @@ function PromoCardView({ card }: { card: PromoCard }) {
       {card.usage && (
         <div className={styles["usageMeter"]}>
           <div className={styles["usageMeta"]}>
-            <span>AI Generations</span>
-            <strong>
-              {card.usage.current}/{card.usage.total}
-            </strong>
+            <strong>{remainingGenerations} Generations remaining</strong>
+            <Icon name="chevron-down" size="1x" />
           </div>
           <div className={styles["progressTrack"]}>
             <div
               className={styles["progressFill"]}
               style={{
-                width: `${(Number(card.usage.current) / Number(card.usage.total)) * 100}%`,
+                width: `${(remainingGenerations / Number(card.usage.total)) * 100}%`,
               }}
             />
           </div>
