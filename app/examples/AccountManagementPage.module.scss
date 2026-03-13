@@ -165,9 +165,9 @@
 }
 
 .coreHeroCards .promoCard {
-  height: 440px;
-  max-height: 440px;
-  min-height: 440px;
+  height: 400px;
+  max-height: 400px;
+  min-height: 400px;
   gap: 16px;
   padding: 20px 20px 24px;
 }
@@ -494,8 +494,8 @@
 
   .heroCards:not(.heroCardsSingle) .promoCard {
     gap: 16px;
-    height: 440px;
-    min-height: 440px;
+    height: 400px;
+    min-height: 400px;
     padding: 20px 20px 24px;
   }
 
