@@ -104,8 +104,8 @@
 }
 
 .ultimateMonthlyHeroInner .heroCardsSingle {
-  flex: 0 0 384px;
-  width: 384px;
+  flex: 0 0 349px;
+  width: 349px;
 }
 
 .eyebrow {
@@ -430,7 +430,7 @@
 
 .ultimateMonthlyHeroCards {
   gap: 28px;
-  grid-template-columns: repeat(2, minmax(280px, 384px));
+  grid-template-columns: repeat(2, minmax(280px, 349px));
 }
 
 .plusMonthlyHeroCards.heroCardsSingle {
@@ -438,7 +438,7 @@
 }
 
 .ultimateMonthlyHeroCards.heroCardsSingle {
-  grid-template-columns: minmax(280px, 384px);
+  grid-template-columns: minmax(280px, 349px);
 }
 
 .plusMonthlyHeroCards .promoCard {
@@ -906,11 +906,11 @@
   }
 
   .ultimateMonthlyHeroCards {
-    grid-template-columns: repeat(2, minmax(280px, 384px));
+    grid-template-columns: repeat(2, minmax(280px, 349px));
   }
 
   .ultimateMonthlyHeroCards.heroCardsSingle {
-    grid-template-columns: minmax(280px, 384px);
+    grid-template-columns: minmax(280px, 349px);
   }
 }
 
