@@ -1,4 +1,5 @@
 import type { iconNames } from "@envato/design-system/components";
+import { useState } from "react";
 
 import { Bleed, Button, Icon } from "@envato/design-system/components";
 
@@ -64,6 +65,7 @@ type PageConfig = {
 
 export type AccountManagementVariant =
   | "core-monthly"
+  | "core-monthly-alt"
   | "core-annual"
   | "plus-monthly"
   | "plus-annual"
@@ -118,11 +120,19 @@ function ActionItem({ action }: { action: ActionLink }) {
   );
 }
 
-function PromoCardView({ card }: { card: PromoCard }) {
+function PromoCardView({
+  card,
+  collapsibleUsage = false,
+}: {
+  card: PromoCard;
+  collapsibleUsage?: boolean;
+}) {
   const remainingGenerations = card.usage
     ? Math.max(Number(card.usage.total) - Number(card.usage.current), 0)
     : 0;
   const hasSingleActionUsageLayout = Boolean(card.usage) && card.actions.length === 1;
+  const hasCollapsibleUsage = Boolean(card.usage) && collapsibleUsage;
+  const [isUsageExpanded, setIsUsageExpanded] = useState(true);
 
   return (
     <article
@@ -130,6 +140,8 @@ function PromoCardView({ card }: { card: PromoCard }) {
         card.emphasized ? styles["promoCardPrimary"] : ""
       } ${!card.usage ? styles["promoCardBottomAlignedActions"] : ""} ${
         hasSingleActionUsageLayout ? styles["promoCardSingleActionBottomAligned"] : ""
+      } ${hasCollapsibleUsage ? styles["promoCardCollapsibleUsage"] : ""} ${
+        hasCollapsibleUsage && !isUsageExpanded ? styles["promoCardUsageCollapsed"] : ""
       }`}
     >
       <h2 className={styles["cardTitle"]}>{card.title}</h2>
@@ -138,6 +150,17 @@ function PromoCardView({ card }: { card: PromoCard }) {
         <div className={styles["usageMeter"]}>
           <div className={styles["usageMeta"]}>
             <strong>{remainingGenerations} Generations remaining</strong>
+            {hasCollapsibleUsage ? (
+              <button
+                aria-expanded={isUsageExpanded}
+                aria-label={isUsageExpanded ? "Collapse generation details" : "Expand generation details"}
+                className={styles["usageToggle"]}
+                onClick={() => setIsUsageExpanded((current) => !current)}
+                type="button"
+              >
+                <Icon name={isUsageExpanded ? "chevron-up" : "chevron-down"} size="1x" />
+              </button>
+            ) : null}
           </div>
           <div className={styles["progressTrack"]}>
             <div
@@ -147,16 +170,18 @@ function PromoCardView({ card }: { card: PromoCard }) {
               }}
             />
           </div>
-          <div className={styles["usageDetails"]}>
-            <div className={styles["usageDetailRow"]}>
-              <span>Total generations</span>
-              <span>{card.usage.total}</span>
+          {(!hasCollapsibleUsage || isUsageExpanded) && (
+            <div className={styles["usageDetails"]}>
+              <div className={styles["usageDetailRow"]}>
+                <span>Total generations</span>
+                <span>{card.usage.total}</span>
+              </div>
+              <div className={styles["usageDetailRow"]}>
+                <span>Plan resets</span>
+                <span>{card.usage.resetDate}</span>
+              </div>
             </div>
-            <div className={styles["usageDetailRow"]}>
-              <span>Plan resets</span>
-              <span>{card.usage.resetDate}</span>
-            </div>
-          </div>
+          )}
         </div>
       )}
 
@@ -204,6 +229,7 @@ function PromoCardView({ card }: { card: PromoCard }) {
 export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   const externalUrls = useExternalUrls();
   const isCoreMonthlyVariant = variant === "core-monthly";
+  const isCoreMonthlyAltVariant = variant === "core-monthly-alt";
   const isCoreAnnualVariant = variant === "core-annual";
   const isPlusMonthlyVariant = variant === "plus-monthly";
   const isPlusAnnualVariant = variant === "plus-annual";
@@ -295,6 +321,54 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
 
   const configs: Record<AccountManagementVariant, PageConfig> = {
     "core-monthly": {
+      title: "Core Individual Subscription",
+      renewalCadence: "monthly",
+      nextPaymentAmount: "USD $33.00",
+      nextPaymentDate: "Jan 07, 2027",
+      nextPaymentDays: 360,
+      planFeature: { count: "10" },
+      promoCards: [
+        {
+          title: "Elevate your plan!",
+          body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
+          ctaHref: pricingUrl,
+          ctaLabel: "Explore more",
+          emphasized: true,
+          usage: { current: "5", total: "10", resetDate: "14 April, 2026" },
+          actions: [
+            {
+              href: `${pricingUrl}?plan=ultimate`,
+              label: "Upgrade to Ultimate",
+              variant: "primary",
+            },
+            {
+              href: `${pricingUrl}?plan=plus`,
+              label: "Upgrade to Plus",
+              outlined: true,
+              radius: "4px",
+              variant: "secondary",
+            },
+          ],
+        },
+        {
+          title: "Switch to annual payments and save 50%",
+          body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
+          actions: [
+            {
+              href: withHash(externalUrls.myAccount, "switch-to-annual"),
+              label: "Switch to annual",
+              outlined: true,
+              radius: "8px",
+              variant: "secondary",
+            },
+          ],
+        },
+      ],
+      manageSubscription: sharedManageSubscriptionLinks,
+      copyright:
+        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+    },
+    "core-monthly-alt": {
       title: "Core Individual Subscription",
       renewalCadence: "monthly",
       nextPaymentAmount: "USD $33.00",
@@ -595,9 +669,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                 } ${
                   isUltimateAnnualVariant ? styles["ultimateAnnualHeroCards"] : ""
                 } ${
-                  isCoreMonthlyVariant ? styles["coreMonthlyHeroCards"] : ""
+                  isCoreMonthlyVariant || isCoreMonthlyAltVariant ? styles["coreMonthlyHeroCards"] : ""
                 } ${
                   isCoreAnnualVariant ? styles["coreAnnualHeroCards"] : ""
+                } ${
+                  isCoreMonthlyAltVariant ? styles["coreMonthlyAltHeroCards"] : ""
                 } ${
                   isPlusMonthlyVariant ? styles["plusMonthlyHeroCards"] : ""
                 } ${
@@ -607,7 +683,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                 }`}
               >
                 {config.promoCards.map((card) => (
-                  <PromoCardView card={card} key={card.title} />
+                  <PromoCardView
+                    card={card}
+                    collapsibleUsage={isCoreMonthlyAltVariant}
+                    key={card.title}
+                  />
                 ))}
               </div>
             ) : null}

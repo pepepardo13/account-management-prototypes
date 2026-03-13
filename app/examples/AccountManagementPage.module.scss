@@ -251,6 +251,16 @@
   width: 100%;
 }
 
+.coreMonthlyAltHeroCards .promoCardCollapsibleUsage {
+  align-self: start;
+}
+
+.coreMonthlyAltHeroCards .promoCardCollapsibleUsage.promoCardUsageCollapsed {
+  height: auto;
+  max-height: none;
+  min-height: 0;
+}
+
 .coreAnnualHeroCards .promoCard {
   gap: 24px;
   height: auto;
@@ -645,6 +655,19 @@
   font-size: 14px;
 }
 
+.usageToggle {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
 .usageDetails {
   color: inherit;
   display: flex;
@@ -935,6 +958,12 @@
   }
 
   .heroCards:not(.heroCardsSingle) .cardSpacer {
+    min-height: 0;
+  }
+
+  .coreMonthlyAltHeroCards .promoCardCollapsibleUsage.promoCardUsageCollapsed {
+    height: auto;
+    max-height: none;
     min-height: 0;
   }
 

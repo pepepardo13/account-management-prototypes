@@ -33,6 +33,13 @@ export const PlusMonthly: Story = {
   },
 };
 
+export const CoreMonthlyAlt: Story = {
+  name: "Core Monthly Alt",
+  args: {
+    variant: "core-monthly-alt",
+  },
+};
+
 export const CoreAnnual: Story = {
   args: {
     variant: "core-annual",
