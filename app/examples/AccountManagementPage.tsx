@@ -231,7 +231,7 @@ function PromoCardView({
 
 export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   const externalUrls = useExternalUrls();
-  const [isCoreMonthlyAltUsageExpanded, setIsCoreMonthlyAltUsageExpanded] = useState(true);
+  const [isCoreMonthlyAltUsageExpanded, setIsCoreMonthlyAltUsageExpanded] = useState(false);
   const isCoreMonthlyVariant = variant === "core-monthly";
   const isCoreMonthlyAltVariant = variant === "core-monthly-alt";
   const isCoreAnnualVariant = variant === "core-annual";
