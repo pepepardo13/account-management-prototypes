@@ -203,10 +203,12 @@ function PromoCardView({ card }: { card: PromoCard }) {
 
 export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   const externalUrls = useExternalUrls();
-  const isCoreVariant = variant === "core-monthly" || variant === "core-annual";
-  const isCompactMonthlyVariant =
-    variant === "plus-monthly" || variant === "ultimate-monthly";
-  const usesRefinedPromoCards = !isCoreVariant && !isCompactMonthlyVariant;
+  const isCoreMonthlyVariant = variant === "core-monthly";
+  const isCoreAnnualVariant = variant === "core-annual";
+  const isPlusMonthlyVariant = variant === "plus-monthly";
+  const isPlusAnnualVariant = variant === "plus-annual";
+  const isUltimateMonthlyVariant = variant === "ultimate-monthly";
+  const isUltimateAnnualVariant = variant === "ultimate-annual";
   const pricingUrl = new URL("/pricing", externalUrls.storefront).toString();
   const forumsUrl = "https://forums.envato.com";
   const cookiesUrl = `${externalUrls.privacyPolicy}#cookies`;
@@ -538,14 +540,18 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
             className={`${styles["heroInner"]} ${
               isAnnualVariant ? styles["annualHeroInner"] : ""
             } ${
-              isCompactMonthlyVariant ? styles["compactMonthlyHeroInner"] : ""
+              isPlusMonthlyVariant || isUltimateMonthlyVariant
+                ? styles["compactMonthlyHeroInner"]
+                : ""
             }`}
           >
             <div
               className={`${styles["planSummary"]} ${
                 hasSingleAnnualHeroCard ? styles["annualPlanSummary"] : ""
               } ${
-                isCompactMonthlyVariant ? styles["compactMonthlyPlanSummary"] : ""
+                isPlusMonthlyVariant || isUltimateMonthlyVariant
+                  ? styles["compactMonthlyPlanSummary"]
+                  : ""
               }`}
             >
               <p className={styles["eyebrow"]}>Current Plan</p>
@@ -585,11 +591,17 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
             {config.promoCards.length > 0 ? (
               <div
                 className={`${styles["heroCards"]} ${
-                  usesRefinedPromoCards ? styles["refinedPromoCards"] : ""
+                  isPlusAnnualVariant ? styles["plusAnnualHeroCards"] : ""
                 } ${
-                  isCoreVariant ? styles["coreHeroCards"] : ""
+                  isUltimateAnnualVariant ? styles["ultimateAnnualHeroCards"] : ""
                 } ${
-                  isCompactMonthlyVariant ? styles["compactMonthlyHeroCards"] : ""
+                  isCoreMonthlyVariant ? styles["coreMonthlyHeroCards"] : ""
+                } ${
+                  isCoreAnnualVariant ? styles["coreAnnualHeroCards"] : ""
+                } ${
+                  isPlusMonthlyVariant ? styles["plusMonthlyHeroCards"] : ""
+                } ${
+                  isUltimateMonthlyVariant ? styles["ultimateMonthlyHeroCards"] : ""
                 } ${
                   config.promoCards.length === 1 ? styles["heroCardsSingle"] : ""
                 }`}

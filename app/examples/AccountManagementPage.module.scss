@@ -181,7 +181,7 @@
   grid-template-columns: minmax(280px, 349px);
 }
 
-.coreHeroCards .promoCard {
+.coreMonthlyHeroCards .promoCard {
   height: 424px;
   max-height: 424px;
   min-height: 424px;
@@ -189,15 +189,29 @@
   padding: 20px 20px 24px;
 }
 
-.coreHeroCards .cardActions {
+.coreMonthlyHeroCards .cardActions {
   gap: 12px;
 }
 
-.refinedPromoCards {
+.coreAnnualHeroCards .promoCard {
+  height: 424px;
+  max-height: 424px;
+  min-height: 424px;
+  gap: 16px;
+  padding: 20px 20px 24px;
+}
+
+.coreAnnualHeroCards .cardActions {
+  gap: 12px;
+}
+
+.plusAnnualHeroCards,
+.ultimateAnnualHeroCards {
   grid-template-columns: repeat(2, 349px);
 }
 
-.refinedPromoCards .promoCard {
+.plusAnnualHeroCards .promoCard,
+.ultimateAnnualHeroCards .promoCard {
   gap: 24px;
   height: 416px;
   max-height: 416px;
@@ -205,80 +219,99 @@
   padding: 24px 32px;
 }
 
-.refinedPromoCards .promoCardPrimary {
+.plusAnnualHeroCards .promoCardPrimary,
+.ultimateAnnualHeroCards .promoCardPrimary {
   border-width: 2px;
 }
 
-.refinedPromoCards .promoCard:not(.promoCardPrimary) {
+.plusAnnualHeroCards .promoCard:not(.promoCardPrimary),
+.ultimateAnnualHeroCards .promoCard:not(.promoCardPrimary) {
   border-color: #8c8c8c;
 }
 
-.refinedPromoCards .cardTitle {
+.plusAnnualHeroCards .cardTitle,
+.ultimateAnnualHeroCards .cardTitle {
   font-size: 24px;
 }
 
-.refinedPromoCards .usageMeter {
+.plusAnnualHeroCards .usageMeter,
+.ultimateAnnualHeroCards .usageMeter {
   gap: 8px;
   width: 285px;
 }
 
-.refinedPromoCards .usageMeta {
+.plusAnnualHeroCards .usageMeta,
+.ultimateAnnualHeroCards .usageMeta {
   font-size: 14px;
   letter-spacing: 0.28px;
 }
 
-.refinedPromoCards .usageMeta strong {
+.plusAnnualHeroCards .usageMeta strong,
+.ultimateAnnualHeroCards .usageMeta strong {
   font-size: 14px;
 }
 
-.refinedPromoCards .progressTrack,
-.refinedPromoCards .usageDetails {
+.plusAnnualHeroCards .progressTrack,
+.plusAnnualHeroCards .usageDetails,
+.ultimateAnnualHeroCards .progressTrack,
+.ultimateAnnualHeroCards .usageDetails {
   width: 285px;
 }
 
-.refinedPromoCards .usageDetailRow {
+.plusAnnualHeroCards .usageDetailRow,
+.ultimateAnnualHeroCards .usageDetailRow {
   font-size: 12px;
   letter-spacing: 0.24px;
 }
 
-.refinedPromoCards .cardCopy {
+.plusAnnualHeroCards .cardCopy,
+.ultimateAnnualHeroCards .cardCopy {
   max-width: 285px;
 }
 
-.refinedPromoCards .cardSpacer {
+.plusAnnualHeroCards .cardSpacer,
+.ultimateAnnualHeroCards .cardSpacer {
   display: none;
 }
 
-.refinedPromoCards .cardActions {
+.plusAnnualHeroCards .cardActions,
+.ultimateAnnualHeroCards .cardActions {
   gap: 16px;
 }
 
-.refinedPromoCards .promoCardBottomAlignedActions .cardCopy {
+.plusAnnualHeroCards .promoCardBottomAlignedActions .cardCopy,
+.ultimateAnnualHeroCards .promoCardBottomAlignedActions .cardCopy {
   font-size: 16px;
   max-width: 285px;
 }
 
-.refinedPromoCards .promoCardBottomAlignedActions .cardActions {
+.plusAnnualHeroCards .promoCardBottomAlignedActions .cardActions,
+.ultimateAnnualHeroCards .promoCardBottomAlignedActions .cardActions {
   margin-top: auto;
   width: 100%;
 }
 
-.refinedPromoCards .promoCardBottomAlignedActions .outlinedButton,
-.refinedPromoCards .promoCardBottomAlignedActions .outlinedButton :global(button) {
+.plusAnnualHeroCards .promoCardBottomAlignedActions .outlinedButton,
+.plusAnnualHeroCards .promoCardBottomAlignedActions .outlinedButton :global(button),
+.ultimateAnnualHeroCards .promoCardBottomAlignedActions .outlinedButton,
+.ultimateAnnualHeroCards .promoCardBottomAlignedActions .outlinedButton :global(button) {
   width: 100%;
 }
 
-.compactMonthlyHeroCards {
+.plusMonthlyHeroCards,
+.ultimateMonthlyHeroCards {
   align-self: center;
   gap: 20px;
   grid-template-columns: repeat(2, 244px);
 }
 
-.compactMonthlyHeroCards.heroCardsSingle {
+.plusMonthlyHeroCards.heroCardsSingle,
+.ultimateMonthlyHeroCards.heroCardsSingle {
   grid-template-columns: 280px;
 }
 
-.compactMonthlyHeroCards .promoCard {
+.plusMonthlyHeroCards .promoCard,
+.ultimateMonthlyHeroCards .promoCard {
   gap: 24px;
   height: 336px;
   max-height: 336px;
@@ -286,65 +319,82 @@
   padding: 24px;
 }
 
-.compactMonthlyHeroCards .promoCardPrimary {
+.plusMonthlyHeroCards .promoCardPrimary,
+.ultimateMonthlyHeroCards .promoCardPrimary {
   border-width: 2px;
 }
 
-.compactMonthlyHeroCards .promoCard:not(.promoCardPrimary) {
+.plusMonthlyHeroCards .promoCard:not(.promoCardPrimary),
+.ultimateMonthlyHeroCards .promoCard:not(.promoCardPrimary) {
   border-color: #8c8c8c;
 }
 
-.compactMonthlyHeroCards .usageMeter,
-.compactMonthlyHeroCards .progressTrack,
-.compactMonthlyHeroCards .usageDetails,
-.compactMonthlyHeroCards .cardCopy {
+.plusMonthlyHeroCards .usageMeter,
+.plusMonthlyHeroCards .progressTrack,
+.plusMonthlyHeroCards .usageDetails,
+.plusMonthlyHeroCards .cardCopy,
+.ultimateMonthlyHeroCards .usageMeter,
+.ultimateMonthlyHeroCards .progressTrack,
+.ultimateMonthlyHeroCards .usageDetails,
+.ultimateMonthlyHeroCards .cardCopy {
   max-width: none;
   width: 100%;
 }
 
-.compactMonthlyHeroCards .usageMeta {
+.plusMonthlyHeroCards .usageMeta,
+.ultimateMonthlyHeroCards .usageMeta {
   font-size: 14px;
   letter-spacing: 0.28px;
 }
 
-.compactMonthlyHeroCards .usageMeta strong {
+.plusMonthlyHeroCards .usageMeta strong,
+.ultimateMonthlyHeroCards .usageMeta strong {
   font-size: 14px;
 }
 
-.compactMonthlyHeroCards .usageDetailRow {
+.plusMonthlyHeroCards .usageDetailRow,
+.ultimateMonthlyHeroCards .usageDetailRow {
   font-size: 12px;
   letter-spacing: 0.24px;
 }
 
-.compactMonthlyHeroCards .cardCopy {
+.plusMonthlyHeroCards .cardCopy,
+.ultimateMonthlyHeroCards .cardCopy {
   font-size: 14px;
   line-height: 1.5;
 }
 
-.compactMonthlyHeroCards .promoCardBottomAlignedActions .cardCopy {
+.plusMonthlyHeroCards .promoCardBottomAlignedActions .cardCopy,
+.ultimateMonthlyHeroCards .promoCardBottomAlignedActions .cardCopy {
   font-size: 16px;
   line-height: 1.5;
 }
 
-.compactMonthlyHeroCards .cardSpacer {
+.plusMonthlyHeroCards .cardSpacer,
+.ultimateMonthlyHeroCards .cardSpacer {
   display: none;
 }
 
-.compactMonthlyHeroCards .cardActions {
+.plusMonthlyHeroCards .cardActions,
+.ultimateMonthlyHeroCards .cardActions {
   gap: 24px;
   width: 100%;
 }
 
-.compactMonthlyHeroCards .outlinedButton,
-.compactMonthlyHeroCards .outlinedButton :global(button) {
+.plusMonthlyHeroCards .outlinedButton,
+.plusMonthlyHeroCards .outlinedButton :global(button),
+.ultimateMonthlyHeroCards .outlinedButton,
+.ultimateMonthlyHeroCards .outlinedButton :global(button) {
   width: 100%;
 }
 
-.compactMonthlyHeroCards .promoCardBottomAlignedActions .cardActions {
+.plusMonthlyHeroCards .promoCardBottomAlignedActions .cardActions,
+.ultimateMonthlyHeroCards .promoCardBottomAlignedActions .cardActions {
   margin-top: auto;
 }
 
-.compactMonthlyHeroCards .promoCardSingleActionBottomAligned .cardActions {
+.plusMonthlyHeroCards .promoCardSingleActionBottomAligned .cardActions,
+.ultimateMonthlyHeroCards .promoCardSingleActionBottomAligned .cardActions {
   bottom: 24px;
   left: 24px;
   margin-top: 0;
@@ -353,7 +403,8 @@
   width: auto;
 }
 
-.compactMonthlyHeroCards .promoCardSingleActionBottomAligned {
+.plusMonthlyHeroCards .promoCardSingleActionBottomAligned,
+.ultimateMonthlyHeroCards .promoCardSingleActionBottomAligned {
   position: relative;
 }
 
@@ -667,11 +718,13 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .compactMonthlyHeroCards {
+  .plusMonthlyHeroCards,
+  .ultimateMonthlyHeroCards {
     grid-template-columns: repeat(2, 244px);
   }
 
-  .compactMonthlyHeroCards.heroCardsSingle {
+  .plusMonthlyHeroCards.heroCardsSingle,
+  .ultimateMonthlyHeroCards.heroCardsSingle {
     grid-template-columns: 280px;
   }
 }
@@ -710,13 +763,17 @@
     min-height: 0;
   }
 
-  .compactMonthlyHeroCards,
-  .compactMonthlyHeroCards.heroCardsSingle {
+  .plusMonthlyHeroCards,
+  .plusMonthlyHeroCards.heroCardsSingle,
+  .ultimateMonthlyHeroCards,
+  .ultimateMonthlyHeroCards.heroCardsSingle {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .compactMonthlyHeroCards .promoCard,
-  .compactMonthlyHeroCards.heroCardsSingle .promoCard {
+  .plusMonthlyHeroCards .promoCard,
+  .plusMonthlyHeroCards.heroCardsSingle .promoCard,
+  .ultimateMonthlyHeroCards .promoCard,
+  .ultimateMonthlyHeroCards.heroCardsSingle .promoCard {
     height: auto;
     max-height: none;
     min-height: 336px;
