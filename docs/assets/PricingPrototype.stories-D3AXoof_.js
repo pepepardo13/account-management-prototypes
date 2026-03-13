@@ -1,4 +1,4 @@
-import{j as e}from"./iframe-CJ3LBANJ.js";import{P as a}from"./PricingPage-COivpZ5y.js";import{s as r}from"./PricingPage.module-SjUVxjT9.js";import{P as c}from"./PricingPageGlobalSeatSelection-CxUaQSQO.js";import{B as i}from"./Bleed-DZF7dlEV.js";import"./preload-helper-PPVm8Dsz.js";function s(){return e.jsxs(e.Fragment,{children:[e.jsx("style",{children:`
+import{j as e}from"./iframe-D2x43eMq.js";import{P as a}from"./PricingPage-DLjubMHw.js";import{s as r}from"./PricingPage.module-SjUVxjT9.js";import{P as c}from"./PricingPageGlobalSeatSelection-BuvFSNAM.js";import{B as i}from"./Bleed-BDlX1qH2.js";import"./preload-helper-PPVm8Dsz.js";function s(){return e.jsxs(e.Fragment,{children:[e.jsx("style",{children:`
         .${r.toggleButtonActive} {
           background: #87e64b;
           color: #191919;

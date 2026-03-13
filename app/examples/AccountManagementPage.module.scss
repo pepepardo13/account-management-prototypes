@@ -182,15 +182,74 @@
 }
 
 .coreMonthlyHeroCards .promoCard {
-  height: 424px;
-  max-height: 424px;
-  min-height: 424px;
-  gap: 16px;
-  padding: 20px 20px 24px;
+  gap: 24px;
+  height: 416px;
+  max-height: 416px;
+  min-height: 416px;
+  padding: 24px 32px;
+}
+
+.coreMonthlyHeroCards .promoCardPrimary {
+  border-width: 2px;
+}
+
+.coreMonthlyHeroCards .promoCard:not(.promoCardPrimary) {
+  border-color: #8c8c8c;
+}
+
+.coreMonthlyHeroCards .cardTitle {
+  font-size: 24px;
+}
+
+.coreMonthlyHeroCards .usageMeter {
+  gap: 8px;
+  width: 285px;
+}
+
+.coreMonthlyHeroCards .usageMeta {
+  font-size: 14px;
+  letter-spacing: 0.28px;
+}
+
+.coreMonthlyHeroCards .usageMeta strong {
+  font-size: 14px;
+}
+
+.coreMonthlyHeroCards .progressTrack,
+.coreMonthlyHeroCards .usageDetails {
+  width: 285px;
+}
+
+.coreMonthlyHeroCards .usageDetailRow {
+  font-size: 12px;
+  letter-spacing: 0.24px;
+}
+
+.coreMonthlyHeroCards .cardCopy {
+  max-width: 285px;
+}
+
+.coreMonthlyHeroCards .cardSpacer {
+  display: none;
 }
 
 .coreMonthlyHeroCards .cardActions {
-  gap: 12px;
+  gap: 16px;
+}
+
+.coreMonthlyHeroCards .promoCardBottomAlignedActions .cardCopy {
+  font-size: 16px;
+  max-width: 285px;
+}
+
+.coreMonthlyHeroCards .promoCardBottomAlignedActions .cardActions {
+  margin-top: auto;
+  width: 100%;
+}
+
+.coreMonthlyHeroCards .promoCardBottomAlignedActions .outlinedButton,
+.coreMonthlyHeroCards .promoCardBottomAlignedActions .outlinedButton :global(button) {
+  width: 100%;
 }
 
 .coreAnnualHeroCards .promoCard {
