@@ -73,7 +73,7 @@
 }
 
 .plusMonthlyHeroInner {
-  align-items: center;
+  align-items: stretch;
   gap: 28px;
   max-width: 1312px;
 }
@@ -100,8 +100,8 @@
 }
 
 .plusMonthlyPlanSummary {
-  flex: 1 1 0;
-  max-width: none;
+  flex: 0 0 534px;
+  max-width: 534px;
 }
 
 .ultimateMonthlyPlanSummary {
@@ -846,7 +846,7 @@
 
   .plusMonthlyHeroInner {
     gap: 32px;
-    max-width: 640px;
+    max-width: 883px;
   }
 
   .ultimateMonthlyHeroInner {
