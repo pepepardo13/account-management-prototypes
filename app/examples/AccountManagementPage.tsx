@@ -735,7 +735,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
+          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -776,7 +776,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
+          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -817,7 +817,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
+          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -858,7 +858,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
+          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -886,7 +886,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
+          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -914,7 +914,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Plus or Ultimate plan and unlock up to 100 or unlimited generations.",
+          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
