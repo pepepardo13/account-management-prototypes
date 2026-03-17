@@ -384,6 +384,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
     isPlusMonthlyV2Variant ||
     isPlusAnnualV2Variant;
   const hasWideTopBarUsageVariant = isPlusMonthlyV2Variant || isPlusAnnualV2Variant;
+  const hasShortRefreshedV2HeroCards = isPlusMonthlyV2Variant || isPlusAnnualV2Variant;
   const isAltVariant =
     isCoreMonthlyAltVariant || isCoreAnnualAltVariant || isPlusMonthlyAltVariant || isPlusAnnualAltVariant;
   const pricingUrl = new URL("/pricing", externalUrls.storefront).toString();
@@ -1159,6 +1160,8 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                   isCoreMonthlyFamilyVariant ? styles["coreMonthlyHeroCards"] : ""
                 } ${
                   isRefreshedV2Variant ? styles["refreshedV2HeroCards"] : ""
+                } ${
+                  hasShortRefreshedV2HeroCards ? styles["shortRefreshedV2HeroCards"] : ""
                 } ${
                   isCoreAnnualFamilyVariant ? styles["coreAnnualHeroCards"] : ""
                 } ${

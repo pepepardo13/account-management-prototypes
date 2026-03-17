@@ -850,6 +850,13 @@
   line-height: 1.5;
 }
 
+.shortRefreshedV2HeroCards .promoCard {
+  height: 304px;
+  max-height: 304px;
+  min-height: 304px;
+  padding: 24px 32px;
+}
+
 .collapsibleHeroCardsCollapsed.plusMonthlyHeroCards .promoCard,
 .collapsibleHeroCardsCollapsed.plusAnnualHeroCards .promoCard,
 .collapsibleHeroCardsCollapsed.coreAnnualHeroCards .promoCard {
@@ -1256,6 +1263,11 @@
     height: auto;
     max-height: none;
     min-height: 352px;
+    padding: 24px 32px;
+  }
+
+  .shortRefreshedV2HeroCards .promoCard {
+    min-height: 304px;
     padding: 24px 32px;
   }
 
