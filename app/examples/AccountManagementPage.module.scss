@@ -857,6 +857,13 @@
   padding: 24px 32px;
 }
 
+.ultimateMonthlyV2HeroCards .promoCard {
+  height: 302px;
+  max-height: 302px;
+  min-height: 302px;
+  padding: 24px 32px;
+}
+
 .collapsibleHeroCardsCollapsed.plusMonthlyHeroCards .promoCard,
 .collapsibleHeroCardsCollapsed.plusAnnualHeroCards .promoCard,
 .collapsibleHeroCardsCollapsed.coreAnnualHeroCards .promoCard {
@@ -1268,6 +1275,11 @@
 
   .shortRefreshedV2HeroCards .promoCard {
     min-height: 304px;
+    padding: 24px 32px;
+  }
+
+  .ultimateMonthlyV2HeroCards .promoCard {
+    min-height: 302px;
     padding: 24px 32px;
   }
 
