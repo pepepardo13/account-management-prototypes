@@ -9,6 +9,21 @@ import envatoHref from "../components/Navigation/HomeLink/envato.svg";
 
 import styles from "./AccountManagementPage.module.scss";
 
+const figmaCheckmarkCircleOutlinedHref =
+  "https://www.figma.com/api/mcp/asset/0cb4fe90-a493-4fd5-ad84-e95a19c5e003";
+const figmaAiLabsHref =
+  "https://www.figma.com/api/mcp/asset/eb23c786-deb1-4f12-91ee-1497e57e5f26";
+const figmaTopBarAiLabsHref =
+  "https://www.figma.com/api/mcp/asset/246282b7-5103-4142-8e6f-c5edd03b1e45";
+const figmaTopBarChevronDownHref =
+  "https://www.figma.com/api/mcp/asset/445862f2-db9b-4615-8e1b-8d17d7e57d31";
+const figmaTopBarChevronUpHref =
+  "https://www.figma.com/api/mcp/asset/232d94c6-e8ac-4e3c-acb2-ebede8673a24";
+const standardSupportingPoints = [
+  "Unlimited downloads of 27+ million of creative assets",
+  "Lifetime commercial license for all creative assets and AI generations",
+];
+
 type IconName = (typeof iconNames)[number];
 
 type ActionLink = {
@@ -26,6 +41,7 @@ type FooterLink = {
 type PlanFeature = {
   badge?: string;
   count?: string;
+  supportingPoints?: string[];
 };
 
 type PromoAction = {
@@ -85,6 +101,8 @@ type Props = {
   variant?: AccountManagementVariant;
 };
 
+type UsageInfo = NonNullable<PromoCard["usage"]>;
+
 const publicSocialLinks: Array<{ href: string; icon: IconName; label: string }> = [
   { href: "https://www.youtube.com/@Envato", icon: "youtube-outlined", label: "YouTube" },
   { href: "https://www.tiktok.com/@envato", icon: "tik-tok", label: "TikTok" },
@@ -129,28 +147,113 @@ function ActionItem({ action }: { action: ActionLink }) {
   );
 }
 
+function getRemainingGenerations(usage: UsageInfo) {
+  return Math.max(Number(usage.total) - Number(usage.current), 0);
+}
+
+function HeaderUsageGauge({
+  usage,
+  isExpanded,
+  isWide = false,
+  onToggle,
+}: {
+  usage: UsageInfo;
+  isExpanded: boolean;
+  isWide?: boolean;
+  onToggle: () => void;
+}) {
+  const remainingGenerations = getRemainingGenerations(usage);
+  const usagePercent = (remainingGenerations / Number(usage.total)) * 100;
+
+  return (
+    <div
+      aria-label="AI generations remaining"
+      className={`${styles["topBarUsage"]} ${
+        isWide ? styles["topBarUsageWide"] : ""
+      } ${isExpanded ? styles["topBarUsageExpanded"] : ""}`}
+    >
+      <div
+        aria-expanded={isExpanded}
+        aria-label={isExpanded ? "Collapse generation details" : "Expand generation details"}
+        className={styles["topBarUsageSurface"]}
+        onClick={onToggle}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            onToggle();
+          }
+        }}
+        role="button"
+        tabIndex={0}
+      >
+        <div className={styles["topBarUsageButton"]}>
+          <div className={styles["topBarUsageHeader"]}>
+            <div className={styles["topBarUsageMeta"]}>
+              <img alt="" src={figmaTopBarAiLabsHref} />
+              <span className={styles["topBarUsageText"]}>
+                {remainingGenerations} Generations remaining
+              </span>
+            </div>
+            <span aria-hidden="true" className={styles["topBarUsageChevron"]}>
+              <img
+                alt=""
+                src={isExpanded ? figmaTopBarChevronUpHref : figmaTopBarChevronDownHref}
+              />
+            </span>
+          </div>
+        </div>
+
+        <div className={styles["topBarUsageMeter"]}>
+          <div className={styles["progressTrack"]}>
+            <div
+              className={styles["progressFill"]}
+              style={{
+                width: `${usagePercent}%`,
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {isExpanded ? (
+        <div className={styles["topBarUsageDetails"]}>
+          <div className={styles["topBarUsageDetailRow"]}>
+            <span>Total generations</span>
+            <span className={styles["topBarUsageValue"]}>{usage.total}</span>
+          </div>
+          <div className={styles["topBarUsageDetailRow"]}>
+            <span>Plan Resets</span>
+            <span className={styles["topBarUsageValue"]}>{usage.resetDate}</span>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 function PromoCardView({
   card,
   collapsibleUsage = false,
+  hideUsage = false,
   isUsageExpanded = true,
   onToggleUsage,
 }: {
   card: PromoCard;
   collapsibleUsage?: boolean;
+  hideUsage?: boolean;
   isUsageExpanded?: boolean;
   onToggleUsage?: () => void;
 }) {
-  const remainingGenerations = card.usage
-    ? Math.max(Number(card.usage.total) - Number(card.usage.current), 0)
-    : 0;
-  const hasSingleActionUsageLayout = Boolean(card.usage) && card.actions.length === 1;
-  const hasCollapsibleUsage = Boolean(card.usage) && collapsibleUsage;
+  const remainingGenerations = card.usage ? getRemainingGenerations(card.usage) : 0;
+  const hasVisibleUsage = Boolean(card.usage) && !hideUsage;
+  const hasSingleActionUsageLayout = hasVisibleUsage && card.actions.length === 1;
+  const hasCollapsibleUsage = hasVisibleUsage && collapsibleUsage;
 
   return (
     <article
       className={`${styles["promoCard"]} ${
         card.emphasized ? styles["promoCardPrimary"] : ""
-      } ${!card.usage ? styles["promoCardBottomAlignedActions"] : ""} ${
+      } ${!hasVisibleUsage ? styles["promoCardBottomAlignedActions"] : ""} ${
         hasSingleActionUsageLayout ? styles["promoCardSingleActionBottomAligned"] : ""
       } ${hasCollapsibleUsage ? styles["promoCardCollapsibleUsage"] : ""} ${
         hasCollapsibleUsage && !isUsageExpanded ? styles["promoCardUsageCollapsed"] : ""
@@ -158,7 +261,7 @@ function PromoCardView({
     >
       <h2 className={styles["cardTitle"]}>{card.title}</h2>
 
-      {card.usage && (
+      {hasVisibleUsage && card.usage && (
         <div className={styles["usageMeter"]}>
           <div className={styles["usageMeta"]}>
             <strong>{remainingGenerations} Generations remaining</strong>
@@ -241,6 +344,7 @@ function PromoCardView({
 export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   const externalUrls = useExternalUrls();
   const [isAltUsageExpanded, setIsAltUsageExpanded] = useState(false);
+  const [isTopBarUsageExpanded, setIsTopBarUsageExpanded] = useState(false);
   const isCoreMonthlyVariant = variant === "core-monthly";
   const isCoreMonthlyAltVariant = variant === "core-monthly-alt";
   const isCoreMonthlyV2Variant = variant === "core-monthly-v2";
@@ -267,6 +371,19 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   const isUltimateAnnualVariant = variant === "ultimate-annual";
   const isUltimateAnnualV2Variant = variant === "ultimate-annual-v2";
   const isUltimateAnnualFamilyVariant = isUltimateAnnualVariant || isUltimateAnnualV2Variant;
+  const isRefreshedV2Variant =
+    isCoreMonthlyV2Variant ||
+    isCoreAnnualV2Variant ||
+    isPlusMonthlyV2Variant ||
+    isPlusAnnualV2Variant ||
+    isUltimateMonthlyV2Variant ||
+    isUltimateAnnualV2Variant;
+  const hasTopBarUsageVariant =
+    isCoreMonthlyV2Variant ||
+    isCoreAnnualV2Variant ||
+    isPlusMonthlyV2Variant ||
+    isPlusAnnualV2Variant;
+  const hasWideTopBarUsageVariant = isPlusMonthlyV2Variant || isPlusAnnualV2Variant;
   const isAltVariant =
     isCoreMonthlyAltVariant || isCoreAnnualAltVariant || isPlusMonthlyAltVariant || isPlusAnnualAltVariant;
   const pricingUrl = new URL("/pricing", externalUrls.storefront).toString();
@@ -456,7 +573,10 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $33.00",
       nextPaymentDate: "Jan 07, 2027",
       nextPaymentDays: 360,
-      planFeature: { count: "10" },
+      planFeature: {
+        count: "10",
+        supportingPoints: standardSupportingPoints,
+      },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -464,7 +584,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
-          usage: { current: "5", total: "10", resetDate: "14 April, 2026" },
+          usage: { current: "5", total: "10", resetDate: "Mar 20, 2026" },
           actions: [
             {
               href: `${pricingUrl}?plan=ultimate`,
@@ -574,7 +694,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { count: "10" },
+      planFeature: { count: "10", supportingPoints: standardSupportingPoints },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -582,7 +702,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
-          usage: { current: "5", total: "10", resetDate: "14 April, 2026" },
+          usage: { current: "5", total: "10", resetDate: "Mar 20, 2026" },
           actions: [
             {
               href: `${pricingUrl}?plan=ultimate`,
@@ -691,7 +811,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $33.00",
       nextPaymentDate: "Jan 07, 2027",
       nextPaymentDays: 360,
-      planFeature: { count: "100" },
+      planFeature: { count: "100", supportingPoints: standardSupportingPoints },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -699,7 +819,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
-          usage: { current: "50", total: "100", resetDate: "14 April, 2026" },
+          usage: { current: "50", total: "100", resetDate: "Mar 20, 2026" },
           actions: [
             {
               href: `${pricingUrl}?plan=ultimate`,
@@ -788,7 +908,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { count: "100" },
+      planFeature: { count: "100", supportingPoints: standardSupportingPoints },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -796,7 +916,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
-          usage: { current: "50", total: "100", resetDate: "14 April, 2026" },
+          usage: { current: "50", total: "100", resetDate: "Mar 20, 2026" },
           actions: [
             {
               href: `${pricingUrl}?plan=ultimate`,
@@ -842,7 +962,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $33.00",
       nextPaymentDate: "Jan 07, 2027",
       nextPaymentDays: 360,
-      planFeature: { badge: "Unlimited" },
+      planFeature: { badge: "Unlimited", supportingPoints: standardSupportingPoints },
       promoCards: [
         {
           title: "Switch to annual payments and save 50%",
@@ -880,7 +1000,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { badge: "Unlimited" },
+      planFeature: { badge: "Unlimited", supportingPoints: standardSupportingPoints },
       promoCards: [],
       manageSubscription: ultimateManageSubscriptionLinks,
       copyright:
@@ -891,6 +1011,9 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   const config = configs[variant];
   const isAnnualVariant = config.renewalCadence === "annually";
   const hasSingleAnnualHeroCard = isAnnualVariant && config.promoCards.length === 1;
+  const topBarUsage = hasTopBarUsageVariant
+    ? config.promoCards.find((card) => card.usage)?.usage
+    : undefined;
 
   const supportLinks: ActionLink[] = [
     {
@@ -930,10 +1053,27 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
               <img alt="Envato" src={envatoHref} />
             </a>
 
-            <button className={styles["profileButton"]} type="button">
-              <span>Juan</span>
-              <Icon color="secondary" name="chevron-down" size="1x" />
-            </button>
+            <div
+              className={`${styles["topBarActions"]} ${
+                hasTopBarUsageVariant ? styles["refreshedV2TopBarActions"] : ""
+              } ${
+                hasWideTopBarUsageVariant ? styles["wideTopBarUsageActions"] : ""
+              }`}
+            >
+              {topBarUsage ? (
+                <HeaderUsageGauge
+                  isExpanded={isTopBarUsageExpanded}
+                  isWide={hasWideTopBarUsageVariant}
+                  onToggle={() => setIsTopBarUsageExpanded((current) => !current)}
+                  usage={topBarUsage}
+                />
+              ) : null}
+
+              <button className={styles["profileButton"]} type="button">
+                <span>Juan</span>
+                <Icon color="secondary" name="chevron-down" size="1x" />
+              </button>
+            </div>
           </div>
         </header>
 
@@ -941,6 +1081,8 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
           <div
             className={`${styles["heroInner"]} ${
               isAnnualVariant ? styles["annualHeroInner"] : ""
+            } ${
+              isRefreshedV2Variant ? styles["refreshedV2HeroInner"] : ""
             } ${
               isPlusMonthlyFamilyVariant ? styles["plusMonthlyHeroInner"] : ""
             } ${
@@ -950,6 +1092,8 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
             <div
               className={`${styles["planSummary"]} ${
                 hasSingleAnnualHeroCard ? styles["annualPlanSummary"] : ""
+              } ${
+                isRefreshedV2Variant ? styles["refreshedV2PlanSummary"] : ""
               } ${
                 isPlusMonthlyFamilyVariant ? styles["plusMonthlyPlanSummary"] : ""
               } ${
@@ -967,7 +1111,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                 {" "}Your next payment of <strong>{config.nextPaymentAmount}</strong>
                 {" "}(excluding tax and discounts) is scheduled for{" "}
                 <strong>{config.nextPaymentDate}</strong>
-                {isAnnualVariant ? (
+                {isAnnualVariant || isRefreshedV2Variant ? (
                   <> {"\u2014"} in {config.nextPaymentDays} days.</>
                 ) : (
                   <> in {config.nextPaymentDays} days.</>
@@ -975,7 +1119,9 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
               </p>
 
               <div className={styles["planFeature"]}>
-                <Icon name="ai-labs" size="1x" />
+                <span className={styles["planFeatureIcon"]}>
+                  <img alt="" src={figmaAiLabsHref} />
+                </span>
                 <div className={styles["planFeatureText"]}>
                   <span>Includes</span>
                   {config.planFeature.badge ? (
@@ -988,6 +1134,19 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                   <span>AI generations</span>
                 </div>
               </div>
+
+              {config.planFeature.supportingPoints?.length ? (
+                <div className={styles["planFeatureSupportingPoints"]}>
+                  {config.planFeature.supportingPoints.map((point) => (
+                    <div className={styles["planFeatureSupportingPoint"]} key={point}>
+                      <span className={styles["planFeatureIcon"]}>
+                        <img alt="" src={figmaCheckmarkCircleOutlinedHref} />
+                      </span>
+                      <span>{point}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
             </div>
 
             {config.promoCards.length > 0 ? (
@@ -998,6 +1157,8 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                   isUltimateAnnualFamilyVariant ? styles["ultimateAnnualHeroCards"] : ""
                 } ${
                   isCoreMonthlyFamilyVariant ? styles["coreMonthlyHeroCards"] : ""
+                } ${
+                  isRefreshedV2Variant ? styles["refreshedV2HeroCards"] : ""
                 } ${
                   isCoreAnnualFamilyVariant ? styles["coreAnnualHeroCards"] : ""
                 } ${
@@ -1018,6 +1179,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                   <PromoCardView
                     card={card}
                     collapsibleUsage={isAltVariant}
+                    hideUsage={hasTopBarUsageVariant}
                     isUsageExpanded={isAltUsageExpanded}
                     key={card.title}
                     onToggleUsage={

@@ -30,6 +30,27 @@
   padding: 8px 32px;
 }
 
+.topBarActions {
+  align-items: center;
+  display: flex;
+  gap: 24px;
+}
+
+.refreshedV2TopBarActions {
+  gap: 16px;
+  min-height: 48px;
+  padding-left: 256px;
+  position: relative;
+}
+
+.wideTopBarUsageActions {
+  padding-left: 296px;
+}
+
+.refreshedV2TopBarActions .profileButton {
+  color: #cccccc;
+}
+
 .logoLink {
   align-items: center;
   display: inline-flex;
@@ -53,6 +74,147 @@
   padding: 8px 0;
 }
 
+.topBarUsage {
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 240px;
+  z-index: 2;
+}
+
+.topBarUsageWide {
+  width: 280px;
+}
+
+.topBarUsageSurface {
+  background: #383838;
+  border-radius: 8px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 48px;
+  justify-content: center;
+  min-width: 240px;
+  padding: 4px 16px;
+  width: 240px;
+}
+
+.topBarUsageWide .topBarUsageSurface {
+  min-width: 280px;
+  width: 280px;
+}
+
+.topBarUsageSurface:focus-visible {
+  outline: 2px solid #87e64b;
+  outline-offset: 2px;
+}
+
+.topBarUsageButton {
+  align-items: flex-start;
+  background: transparent;
+  border: 0;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font: inherit;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.topBarUsageHeader {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.topBarUsageMeta {
+  align-items: center;
+  color: #ffffff;
+  display: flex;
+  flex: 1 1 auto;
+  font-size: 14px;
+  gap: 4px;
+  line-height: 1.5;
+}
+
+.topBarUsageMeta img,
+.topBarUsageChevron img {
+  display: block;
+  flex: 0 0 auto;
+}
+
+.topBarUsageMeta img {
+  height: 16px;
+  width: 16px;
+}
+
+.topBarUsageText {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.topBarUsageChevron {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  justify-content: center;
+}
+
+.topBarUsageChevron img {
+  height: 16px;
+  width: 16px;
+}
+
+.topBarUsageMeter {
+  width: 100%;
+}
+
+.topBarUsage .progressTrack {
+  background: #242424;
+  border-radius: 16px;
+  height: 5px;
+}
+
+.topBarUsage .progressFill {
+  background: #87e64b;
+}
+
+.topBarUsageExpanded .topBarUsageSurface {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.topBarUsageDetails {
+  background: #383838;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0 16px 4px;
+}
+
+.topBarUsageDetailRow {
+  align-items: center;
+  color: #ffffff;
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+  line-height: 1.5;
+  min-height: 37px;
+}
+
+.topBarUsageValue {
+  text-align: right;
+}
+
 .heroSection {
   padding: 32px;
 }
@@ -63,6 +225,11 @@
   gap: 28px;
   margin: 0 auto;
   max-width: 1312px;
+}
+
+.refreshedV2HeroInner {
+  align-items: center;
+  gap: 40px;
 }
 
 .annualHeroInner {
@@ -86,6 +253,27 @@
   gap: 8px;
   justify-content: center;
   min-width: 280px;
+}
+
+.refreshedV2PlanSummary {
+  gap: 8px;
+  justify-content: flex-start;
+  max-width: 534px;
+}
+
+.refreshedV2PlanSummary .planFeature {
+  max-width: 285px;
+  margin-top: 0;
+  width: 100%;
+}
+
+.refreshedV2PlanSummary .description {
+  max-width: 534px;
+}
+
+.refreshedV2PlanSummary .planFeatureSupportingPoint {
+  max-width: 474px;
+  width: 100%;
 }
 
 .annualPlanSummary {
@@ -147,6 +335,37 @@
   display: inline-flex;
   gap: 8px;
   margin-top: 8px;
+}
+
+.planFeatureIcon {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 20px;
+  justify-content: center;
+  width: 20px;
+}
+
+.planFeatureIcon :global(svg),
+.planFeatureIcon img {
+  display: block;
+  height: 20px;
+  width: 20px;
+}
+
+.planFeatureSupportingPoints {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 0;
+}
+
+.planFeatureSupportingPoint {
+  align-items: center;
+  display: inline-flex;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .planFeatureText {
@@ -611,6 +830,26 @@
   position: relative;
 }
 
+.refreshedV2HeroCards .promoCard {
+  height: 352px;
+  max-height: 352px;
+  min-height: 352px;
+  padding: 24px 32px;
+}
+
+.refreshedV2HeroCards .promoCardPrimary {
+  gap: 25px;
+}
+
+.refreshedV2HeroCards .promoCard:not(.promoCardPrimary) {
+  gap: 24px;
+}
+
+.refreshedV2HeroCards .cardCopy {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
 .collapsibleHeroCardsCollapsed.plusMonthlyHeroCards .promoCard,
 .collapsibleHeroCardsCollapsed.plusAnnualHeroCards .promoCard,
 .collapsibleHeroCardsCollapsed.coreAnnualHeroCards .promoCard {
@@ -950,6 +1189,52 @@
     padding-right: 20px;
   }
 
+  .topBarInner {
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+  }
+
+  .topBarActions {
+    align-items: center;
+    flex-direction: row;
+    gap: 12px;
+    width: auto;
+  }
+
+  .refreshedV2TopBarActions {
+    display: contents;
+    min-height: 0;
+    padding-left: 0;
+  }
+
+  .logoLink {
+    order: 1;
+  }
+
+  .profileButton {
+    order: 2;
+  }
+
+  .topBarUsage {
+    left: auto;
+    order: 3;
+    position: static;
+    top: auto;
+    width: 100%;
+  }
+
+  .topBarUsageButton {
+    width: 100%;
+  }
+
+  .topBarUsageSurface {
+    min-width: 0;
+    width: 100%;
+  }
+
   .pageTitle {
     font-size: 26px;
   }
@@ -965,6 +1250,13 @@
     height: 424px;
     min-height: 424px;
     padding: 20px 20px 24px;
+  }
+
+  .refreshedV2HeroCards .promoCard {
+    height: auto;
+    max-height: none;
+    min-height: 352px;
+    padding: 24px 32px;
   }
 
   .heroCards:not(.heroCardsSingle) .cardActions {
