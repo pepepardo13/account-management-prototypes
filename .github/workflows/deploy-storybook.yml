@@ -49,15 +49,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Storybook
-        run: npm run build-storybook
+      - name: Build Storybook for Pages
+        run: npm run build-pages
         env:
           BASE_PATH: ${{ steps.pages.outputs.base }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: storybook-static
+          path: docs
 
       - id: deploy
         name: Deploy to GitHub Pages
