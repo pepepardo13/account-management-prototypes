@@ -218,12 +218,20 @@ function HeaderUsageGauge({
       {isExpanded ? (
         <div className={styles["topBarUsageDetails"]}>
           <div className={styles["topBarUsageDetailRow"]}>
-            <span>Total generations</span>
-            <span className={styles["topBarUsageValue"]}>{usage.total}</span>
+            <Text color="inverse" variant="body-small">
+              Total generations
+            </Text>
+            <Text color="inverse" variant="body-small" className={styles["topBarUsageValue"]}>
+              {usage.total}
+            </Text>
           </div>
           <div className={styles["topBarUsageDetailRow"]}>
-            <span>Plan Resets</span>
-            <span className={styles["topBarUsageValue"]}>{usage.resetDate}</span>
+            <Text color="inverse" variant="body-small">
+              Plan Resets
+            </Text>
+            <Text color="inverse" variant="body-small" className={styles["topBarUsageValue"]}>
+              {usage.resetDate}
+            </Text>
           </div>
         </div>
       ) : null}
@@ -234,14 +242,12 @@ function HeaderUsageGauge({
 function PromoCardView({
   card,
   collapsibleUsage = false,
-  detailTextVariant,
   hideUsage = false,
   isUsageExpanded = true,
   onToggleUsage,
 }: {
   card: PromoCard;
   collapsibleUsage?: boolean;
-  detailTextVariant?: "body-small";
   hideUsage?: boolean;
   isUsageExpanded?: boolean;
   onToggleUsage?: () => void;
@@ -290,30 +296,12 @@ function PromoCardView({
           {(!hasCollapsibleUsage || isUsageExpanded) && (
             <div className={styles["usageDetails"]}>
               <div className={styles["usageDetailRow"]}>
-                {detailTextVariant ? (
-                  <>
-                    <Text variant={detailTextVariant}>Total generations</Text>
-                    <Text variant={detailTextVariant}>{card.usage.total}</Text>
-                  </>
-                ) : (
-                  <>
-                    <span>Total generations</span>
-                    <span>{card.usage.total}</span>
-                  </>
-                )}
+                <Text variant="body-small">Total generations</Text>
+                <Text variant="body-small">{card.usage.total}</Text>
               </div>
               <div className={styles["usageDetailRow"]}>
-                {detailTextVariant ? (
-                  <>
-                    <Text variant={detailTextVariant}>Plan resets</Text>
-                    <Text variant={detailTextVariant}>{card.usage.resetDate}</Text>
-                  </>
-                ) : (
-                  <>
-                    <span>Plan resets</span>
-                    <span>{card.usage.resetDate}</span>
-                  </>
-                )}
+                <Text variant="body-small">Plan resets</Text>
+                <Text variant="body-small">{card.usage.resetDate}</Text>
               </div>
             </div>
           )}
@@ -1205,7 +1193,6 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                   <PromoCardView
                     card={card}
                     collapsibleUsage={isAltVariant}
-                    detailTextVariant={isCoreMonthlyVariant ? "body-small" : undefined}
                     hideUsage={hasTopBarUsageVariant}
                     isUsageExpanded={isAltUsageExpanded}
                     key={card.title}
