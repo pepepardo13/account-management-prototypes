@@ -1,7 +1,7 @@
 import type { iconNames } from "@envato/design-system/components";
 import { useState } from "react";
 
-import { Bleed, Button, Icon, Text } from "@envato/design-system/components";
+import { Bleed, Button, Icon } from "@envato/design-system/components";
 
 import { useExternalUrls } from "../contexts/ExternalUrlsContext.tsx";
 
@@ -218,20 +218,20 @@ function HeaderUsageGauge({
       {isExpanded ? (
         <div className={styles["topBarUsageDetails"]}>
           <div className={styles["topBarUsageDetailRow"]}>
-            <Text color="inverse" variant="body-small">
-              Total generations
-            </Text>
-            <Text color="inverse" variant="body-small" className={styles["topBarUsageValue"]}>
+            <span className={styles["topBarUsageDetailText"]}>Total generations</span>
+            <span
+              className={`${styles["topBarUsageDetailText"]} ${styles["topBarUsageValue"]}`}
+            >
               {usage.total}
-            </Text>
+            </span>
           </div>
           <div className={styles["topBarUsageDetailRow"]}>
-            <Text color="inverse" variant="body-small">
-              Plan Resets
-            </Text>
-            <Text color="inverse" variant="body-small" className={styles["topBarUsageValue"]}>
+            <span className={styles["topBarUsageDetailText"]}>Plan Resets</span>
+            <span
+              className={`${styles["topBarUsageDetailText"]} ${styles["topBarUsageValue"]}`}
+            >
               {usage.resetDate}
-            </Text>
+            </span>
           </div>
         </div>
       ) : null}
@@ -296,12 +296,12 @@ function PromoCardView({
           {(!hasCollapsibleUsage || isUsageExpanded) && (
             <div className={styles["usageDetails"]}>
               <div className={styles["usageDetailRow"]}>
-                <Text variant="body-small">Total generations</Text>
-                <Text variant="body-small">{card.usage.total}</Text>
+                <span className={styles["usageDetailText"]}>Total generations</span>
+                <span className={styles["usageDetailText"]}>{card.usage.total}</span>
               </div>
               <div className={styles["usageDetailRow"]}>
-                <Text variant="body-small">Plan resets</Text>
-                <Text variant="body-small">{card.usage.resetDate}</Text>
+                <span className={styles["usageDetailText"]}>Plan resets</span>
+                <span className={styles["usageDetailText"]}>{card.usage.resetDate}</span>
               </div>
             </div>
           )}

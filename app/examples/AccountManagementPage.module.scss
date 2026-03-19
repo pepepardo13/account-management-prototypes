@@ -206,14 +206,18 @@
   color: #ffffff;
   display: flex;
   font-size: 14px;
-  font-weight: 400;
   justify-content: space-between;
-  letter-spacing: 0;
   line-height: 1.5;
   min-height: 37px;
 }
 
-.topBarUsageDetailRow :global(p) {
+.topBarUsageDetailText {
+  color: #ffffff;
+  font-family: var(--font-family-body-small);
+  font-size: 14px;
+  font-weight: var(--font-weight-body-small);
+  letter-spacing: var(--font-spacing-body-small);
+  line-height: var(--font-height-body-small);
   margin: 0;
 }
 
@@ -927,13 +931,17 @@
   color: inherit;
   display: flex;
   font-size: 14px;
-  font-weight: 400;
   justify-content: space-between;
-  letter-spacing: 0;
   line-height: 1.5;
 }
 
-.usageDetailRow :global(p) {
+.usageDetailText {
+  color: inherit;
+  font-family: var(--font-family-body-small);
+  font-size: 14px;
+  font-weight: var(--font-weight-body-small);
+  letter-spacing: var(--font-spacing-body-small);
+  line-height: var(--font-height-body-small);
   margin: 0;
 }
 
