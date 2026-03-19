@@ -1,7 +1,7 @@
 import type { iconNames } from "@envato/design-system/components";
 import { useState } from "react";
 
-import { Bleed, Button, Icon } from "@envato/design-system/components";
+import { Bleed, Button, Icon, Text } from "@envato/design-system/components";
 
 import { useExternalUrls } from "../contexts/ExternalUrlsContext.tsx";
 
@@ -234,12 +234,14 @@ function HeaderUsageGauge({
 function PromoCardView({
   card,
   collapsibleUsage = false,
+  detailTextVariant,
   hideUsage = false,
   isUsageExpanded = true,
   onToggleUsage,
 }: {
   card: PromoCard;
   collapsibleUsage?: boolean;
+  detailTextVariant?: "body-small";
   hideUsage?: boolean;
   isUsageExpanded?: boolean;
   onToggleUsage?: () => void;
@@ -288,12 +290,30 @@ function PromoCardView({
           {(!hasCollapsibleUsage || isUsageExpanded) && (
             <div className={styles["usageDetails"]}>
               <div className={styles["usageDetailRow"]}>
-                <span>Total generations</span>
-                <span>{card.usage.total}</span>
+                {detailTextVariant ? (
+                  <>
+                    <Text variant={detailTextVariant}>Total generations</Text>
+                    <Text variant={detailTextVariant}>{card.usage.total}</Text>
+                  </>
+                ) : (
+                  <>
+                    <span>Total generations</span>
+                    <span>{card.usage.total}</span>
+                  </>
+                )}
               </div>
               <div className={styles["usageDetailRow"]}>
-                <span>Plan resets</span>
-                <span>{card.usage.resetDate}</span>
+                {detailTextVariant ? (
+                  <>
+                    <Text variant={detailTextVariant}>Plan resets</Text>
+                    <Text variant={detailTextVariant}>{card.usage.resetDate}</Text>
+                  </>
+                ) : (
+                  <>
+                    <span>Plan resets</span>
+                    <span>{card.usage.resetDate}</span>
+                  </>
+                )}
               </div>
             </div>
           )}
@@ -1185,6 +1205,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                   <PromoCardView
                     card={card}
                     collapsibleUsage={isAltVariant}
+                    detailTextVariant={isCoreMonthlyVariant ? "body-small" : undefined}
                     hideUsage={hasTopBarUsageVariant}
                     isUsageExpanded={isAltUsageExpanded}
                     key={card.title}
