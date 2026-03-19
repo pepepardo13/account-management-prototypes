@@ -206,9 +206,15 @@
   color: #ffffff;
   display: flex;
   font-size: 14px;
+  font-weight: 400;
   justify-content: space-between;
+  letter-spacing: 0;
   line-height: 1.5;
   min-height: 37px;
+}
+
+.topBarUsageDetailRow :global(p) {
+  margin: 0;
 }
 
 .topBarUsageValue {
@@ -921,8 +927,14 @@
   color: inherit;
   display: flex;
   font-size: 14px;
+  font-weight: 400;
   justify-content: space-between;
+  letter-spacing: 0;
   line-height: 1.5;
+}
+
+.usageDetailRow :global(p) {
+  margin: 0;
 }
 
 .usageDetailRow span:last-child {
