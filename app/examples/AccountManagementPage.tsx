@@ -487,7 +487,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $33.00",
       nextPaymentDate: "Jan 07, 2027",
       nextPaymentDays: 360,
-      planFeature: { count: "10" },
+      planFeature: { count: "10", supportingPoints: standardSupportingPoints },
       promoCards: [
         {
           title: "Elevate your plan!",
