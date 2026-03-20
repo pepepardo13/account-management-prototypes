@@ -634,7 +634,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { count: "10" },
+      planFeature: { count: "10", supportingPoints: standardSupportingPoints },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -739,7 +739,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $33.00",
       nextPaymentDate: "Jan 07, 2027",
       nextPaymentDays: 360,
-      planFeature: { count: "100" },
+      planFeature: { count: "100", supportingPoints: standardSupportingPoints },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -862,7 +862,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { count: "100" },
+      planFeature: { count: "100", supportingPoints: standardSupportingPoints },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -946,7 +946,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $33.00",
       nextPaymentDate: "Jan 07, 2027",
       nextPaymentDays: 360,
-      planFeature: { badge: "Unlimited" },
+      planFeature: { badge: "Unlimited", supportingPoints: standardSupportingPoints },
       promoCards: [
         {
           title: "Switch to annual payments and save 50%",
@@ -998,7 +998,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { badge: "Unlimited" },
+      planFeature: { badge: "Unlimited", supportingPoints: standardSupportingPoints },
       promoCards: [],
       manageSubscription: ultimateManageSubscriptionLinks,
       copyright:
