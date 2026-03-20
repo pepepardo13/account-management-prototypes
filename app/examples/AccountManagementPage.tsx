@@ -191,7 +191,7 @@ function HeaderUsageGauge({
             <div className={styles["topBarUsageMeta"]}>
               <img alt="" src={figmaTopBarAiLabsHref} />
               <span className={styles["topBarUsageText"]}>
-                {remainingGenerations} Generations remaining
+                {remainingGenerations} AI Generations remaining
               </span>
             </div>
             <span aria-hidden="true" className={styles["topBarUsageChevron"]}>
@@ -272,7 +272,7 @@ function PromoCardView({
       {hasVisibleUsage && card.usage && (
         <div className={styles["usageMeter"]}>
           <div className={styles["usageMeta"]}>
-            <strong>{remainingGenerations} Generations remaining</strong>
+            <strong>{remainingGenerations} AI Generations remaining</strong>
             {hasCollapsibleUsage ? (
               <button
                 aria-expanded={isUsageExpanded}
