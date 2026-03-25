@@ -392,6 +392,12 @@
   line-height: 1.5;
 }
 
+.planFeatureSupportingPoint > span:last-child {
+  align-items: center;
+  display: inline-flex;
+  min-height: 20px;
+}
+
 .planFeatureText {
   align-items: center;
   display: inline-flex;
