@@ -1140,7 +1140,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                   {config.planFeature.supportingPoints.map((point) => (
                     <div className={styles["planFeatureSupportingPoint"]} key={point}>
                       <span className={styles["planFeatureIcon"]}>
-                        <Icon name="done" size="1x" />
+                        <Icon name="checkmark-circle-outlined" size="1x" />
                       </span>
                       <span>{point}</span>
                     </div>
