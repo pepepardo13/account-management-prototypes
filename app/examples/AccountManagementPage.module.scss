@@ -143,14 +143,22 @@
 }
 
 .topBarUsageMeta img,
-.topBarUsageChevron img {
+.topBarUsageMeta :global(svg),
+.topBarUsageChevron img,
+.topBarUsageChevron :global(svg) {
   display: block;
   flex: 0 0 auto;
 }
 
-.topBarUsageMeta img {
+.topBarUsageMeta img,
+.topBarUsageMeta :global(svg) {
   height: 16px;
   width: 16px;
+}
+
+.topBarUsageAiLabsIcon {
+  color: #87e64b;
+  display: inline-flex;
 }
 
 .topBarUsageText {
@@ -167,9 +175,15 @@
   justify-content: center;
 }
 
-.topBarUsageChevron img {
+.topBarUsageChevron img,
+.topBarUsageChevron :global(svg) {
   height: 16px;
   width: 16px;
+}
+
+.topBarUsageChevronIcon {
+  color: #ffffff;
+  display: inline-flex;
 }
 
 .topBarUsageMeter {
