@@ -1,5 +1,5 @@
 import type { iconNames } from "@envato/design-system/components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Bleed, Button, Icon } from "@envato/design-system/components";
 
@@ -120,6 +120,18 @@ function navigateToUrl(url: string, external?: boolean) {
   }
 
   window.location.assign(url);
+}
+
+function getPrototypeHubUrl() {
+  if (typeof window === "undefined") {
+    return "";
+  }
+
+  const url = new URL(window.location.href);
+  url.pathname = `${window.location.pathname.replace(/\/[^/]*$/, "")}/iframe.html`;
+  url.search = "?id=layout-plan-tiers-hub--default&viewMode=story";
+  url.hash = "";
+  return url.toString();
 }
 
 function ActionItem({ action }: { action: ActionLink }) {
@@ -358,6 +370,45 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
   const externalUrls = useExternalUrls();
   const [isAltUsageExpanded, setIsAltUsageExpanded] = useState(false);
   const [isTopBarUsageExpanded, setIsTopBarUsageExpanded] = useState(false);
+
+  useEffect(() => {
+    const redirectUrl = getPrototypeHubUrl();
+
+    if (!redirectUrl) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      const tagName = target?.tagName;
+      const isTypingTarget =
+        tagName === "INPUT" ||
+        tagName === "TEXTAREA" ||
+        tagName === "SELECT" ||
+        target?.isContentEditable;
+
+      if (isTypingTarget) {
+        return;
+      }
+
+      if (
+        event.key === "Escape" ||
+        event.key === "Esc" ||
+        event.key === "Backspace" ||
+        event.key === "BrowserBack"
+      ) {
+        event.preventDefault();
+        window.location.assign(redirectUrl);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   const isCoreMonthlyVariant = variant === "core-monthly";
   const isCoreMonthlyAltVariant = variant === "core-monthly-alt";
   const isCoreMonthlyV2Variant = variant === "core-monthly-v2";
