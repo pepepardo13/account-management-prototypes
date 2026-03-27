@@ -406,11 +406,13 @@
 
 .planFeatureSupportingPoint {
   align-items: center;
-  display: inline-flex;
+  display: grid;
   gap: 8px;
   font-size: 14px;
+  grid-template-columns: 24px 1fr;
   line-height: 1.5;
   letter-spacing: 0;
+  min-height: 24px;
 }
 
 .planFeatureSupportingPoint + .planFeatureSupportingPoint {
@@ -435,6 +437,7 @@
 }
 
 .planFeatureSupportingPoint > span:last-child {
+  align-self: center;
   display: block;
   flex: 1 1 auto;
   min-height: 0;
