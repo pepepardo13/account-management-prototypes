@@ -391,6 +391,14 @@
   width: 24px;
 }
 
+.planFeatureIconAi {
+  transform: translateY(-0.5px);
+}
+
+.planFeatureIconCheck {
+  transform: translateY(-1px);
+}
+
 .planFeatureSupportingPoints {
   display: flex;
   flex-direction: column;

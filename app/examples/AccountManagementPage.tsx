@@ -1168,7 +1168,9 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                     <div
                       className={`${styles["planFeatureSupportingPoint"]} ${styles["planFeatureSupportingPointPrimary"]}`}
                     >
-                      <span className={styles["planFeatureIcon"]}>
+                      <span
+                        className={`${styles["planFeatureIcon"]} ${styles["planFeatureIconAi"]}`}
+                      >
                         <Icon name="ai-labs" size="1x" />
                       </span>
                       <span>
@@ -1188,7 +1190,9 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                       className={`${styles["planFeatureSupportingPoint"]} ${styles["planFeatureSupportingPointSecondary"]}`}
                       key={point}
                     >
-                      <span className={styles["planFeatureIcon"]}>
+                      <span
+                        className={`${styles["planFeatureIcon"]} ${styles["planFeatureIconCheck"]}`}
+                      >
                         <Icon name="checkmark-circle-outlined" size="1x" />
                       </span>
                       <span>{point}</span>
