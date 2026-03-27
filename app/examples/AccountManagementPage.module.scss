@@ -399,7 +399,7 @@
 }
 
 .planFeatureSupportingPoint {
-  align-items: center;
+  align-items: flex-start;
   display: inline-flex;
   gap: 8px;
   font-size: 14px;
@@ -429,8 +429,7 @@
 }
 
 .planFeatureSupportingPoint > span:last-child {
-  align-items: center;
-  display: flex;
+  display: block;
   flex: 1 1 auto;
   min-height: 24px;
 }
