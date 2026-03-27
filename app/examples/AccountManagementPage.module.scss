@@ -335,7 +335,7 @@
   font-weight: 600;
   letter-spacing: 0;
   line-height: 1;
-  margin: 0 0 16px;
+  margin: 0;
 }
 
 .description {
@@ -364,7 +364,7 @@
   flex-direction: column;
   gap: 0;
   max-width: 534px;
-  margin-top: 0;
+  margin-top: 8px;
   width: 534px;
 }
 
@@ -401,14 +401,31 @@
 .planFeatureSupportingPoint {
   align-items: flex-start;
   display: inline-flex;
-  gap: 12px;
-  font-size: 16px;
+  gap: 8px;
+  font-size: 14px;
   line-height: 1.5;
-  width: 100%;
+  letter-spacing: 0;
 }
 
 .planFeatureSupportingPoint + .planFeatureSupportingPoint {
   margin-top: 8px;
+}
+
+.planFeatureSupportingPointPrimary {
+  width: 285px;
+}
+
+.planFeatureSupportingPointPrimary > span:last-child {
+  letter-spacing: 0;
+}
+
+.planFeatureSupportingPointPrimary strong {
+  font-weight: 600;
+  letter-spacing: 0.28px;
+}
+
+.planFeatureSupportingPointSecondary {
+  width: 474px;
 }
 
 .planFeatureSupportingPoint > span:last-child {

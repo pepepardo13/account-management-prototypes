@@ -141,6 +141,18 @@ function getRemainingGenerations(usage: UsageInfo) {
   return Math.max(Number(usage.total) - Number(usage.current), 0);
 }
 
+function getPrimaryFeatureSuffix(feature: PlanFeature) {
+  if (feature.primaryPoint?.includes(" AI generations per month")) {
+    return " AI generations per month";
+  }
+
+  if (feature.primaryPoint?.includes(" AI generations")) {
+    return " AI generations";
+  }
+
+  return feature.primaryPoint ?? "";
+}
+
 function HeaderUsageGauge({
   usage,
   isExpanded,
@@ -1153,15 +1165,29 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                 <p className={styles["planFeatureTitle"]}>Includes:</p>
                 <div className={styles["planFeatureSupportingPoints"]}>
                   {config.planFeature.primaryPoint ? (
-                    <div className={styles["planFeatureSupportingPoint"]}>
+                    <div
+                      className={`${styles["planFeatureSupportingPoint"]} ${styles["planFeatureSupportingPointPrimary"]}`}
+                    >
                       <span className={styles["planFeatureIcon"]}>
                         <Icon name="ai-labs" size="1x" />
                       </span>
-                      <span>{config.planFeature.primaryPoint}</span>
+                      <span>
+                        {config.planFeature.count ? (
+                          <>
+                            <strong>{config.planFeature.count}</strong>
+                            {getPrimaryFeatureSuffix(config.planFeature)}
+                          </>
+                        ) : (
+                          config.planFeature.primaryPoint
+                        )}
+                      </span>
                     </div>
                   ) : null}
                   {config.planFeature.supportingPoints?.map((point) => (
-                    <div className={styles["planFeatureSupportingPoint"]} key={point}>
+                    <div
+                      className={`${styles["planFeatureSupportingPoint"]} ${styles["planFeatureSupportingPointSecondary"]}`}
+                      key={point}
+                    >
                       <span className={styles["planFeatureIcon"]}>
                         <Icon name="checkmark-circle-outlined" size="1x" />
                       </span>
