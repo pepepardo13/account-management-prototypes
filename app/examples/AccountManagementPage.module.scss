@@ -272,12 +272,13 @@
 
 .planSummary {
   display: flex;
-  flex: 1 1 0;
+  flex: 0 0 534px;
   flex-direction: column;
   gap: 8px;
   justify-content: center;
   max-width: 534px;
   min-width: 280px;
+  width: 534px;
 }
 
 .refreshedV2PlanSummary {
@@ -341,7 +342,7 @@
   font-size: 16px;
   line-height: 1.5;
   margin: 0;
-  max-width: 860px;
+  max-width: 534px;
 }
 
 .descriptionAfterFeatures {
@@ -362,8 +363,9 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-width: 760px;
+  max-width: 534px;
   margin-top: 0;
+  width: 534px;
 }
 
 .planFeatureTitle {
@@ -402,6 +404,7 @@
   gap: 12px;
   font-size: 16px;
   line-height: 1.5;
+  width: 100%;
 }
 
 .planFeatureSupportingPoint + .planFeatureSupportingPoint {
@@ -410,6 +413,7 @@
 
 .planFeatureSupportingPoint > span:last-child {
   display: block;
+  flex: 1 1 auto;
   min-height: 24px;
 }
 
