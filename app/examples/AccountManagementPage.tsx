@@ -209,7 +209,7 @@ function HeaderUsageGauge({
                 <Icon name="ai-labs" size="1x" />
               </span>
               <span className={styles["topBarUsageText"]}>
-                {remainingGenerations} AI Generations remaining
+                {remainingGenerations} AI generations remaining
               </span>
             </div>
             <span aria-hidden="true" className={styles["topBarUsageChevron"]}>
@@ -289,7 +289,7 @@ function PromoCardView({
       {hasVisibleUsage && card.usage && (
         <div className={styles["usageMeter"]}>
           <div className={styles["usageMeta"]}>
-            <strong>{remainingGenerations} AI Generations remaining</strong>
+            <strong>{remainingGenerations} AI generations remaining</strong>
             {hasCollapsibleUsage ? (
               <button
                 aria-expanded={isUsageExpanded}
