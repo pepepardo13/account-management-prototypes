@@ -285,7 +285,7 @@
   max-width: 534px;
 }
 
-.refreshedV2PlanSummary .planFeature {
+.refreshedV2PlanSummary .planFeatureBlock {
   max-width: 285px;
   margin-top: 0;
   width: 100%;
@@ -348,17 +348,23 @@
 }
 
 .description strong,
-.planFeature strong,
 .usageMeta strong,
 .cardCopy strong {
   font-weight: 600;
 }
 
-.planFeature {
-  align-items: center;
-  display: inline-flex;
+.planFeatureBlock {
+  display: flex;
+  flex-direction: column;
   gap: 8px;
   margin-top: 8px;
+}
+
+.planFeatureTitle {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
 }
 
 .planFeatureIcon {
@@ -396,27 +402,6 @@
   align-items: center;
   display: inline-flex;
   min-height: 20px;
-}
-
-.planFeatureText {
-  align-items: center;
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.featureBadge {
-  align-items: center;
-  background: #191919;
-  border-radius: 999px;
-  color: #ffffff;
-  display: inline-flex;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.5;
-  padding: 1px 8px;
 }
 
 .heroCards {

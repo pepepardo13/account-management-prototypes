@@ -30,6 +30,7 @@ type FooterLink = {
 type PlanFeature = {
   badge?: string;
   count?: string;
+  primaryPoint?: string;
   supportingPoints?: string[];
 };
 
@@ -208,7 +209,7 @@ function HeaderUsageGauge({
       {isExpanded ? (
         <div className={styles["topBarUsageDetails"]}>
           <div className={styles["topBarUsageDetailRow"]}>
-            <span className={styles["topBarUsageDetailText"]}>Total generations</span>
+            <span className={styles["topBarUsageDetailText"]}>Total generations per month</span>
             <span
               className={`${styles["topBarUsageDetailText"]} ${styles["topBarUsageValue"]}`}
             >
@@ -216,7 +217,7 @@ function HeaderUsageGauge({
             </span>
           </div>
           <div className={styles["topBarUsageDetailRow"]}>
-            <span className={styles["topBarUsageDetailText"]}>Plan Resets</span>
+            <span className={styles["topBarUsageDetailText"]}>Generations resets</span>
             <span
               className={`${styles["topBarUsageDetailText"]} ${styles["topBarUsageValue"]}`}
             >
@@ -286,11 +287,11 @@ function PromoCardView({
           {(!hasCollapsibleUsage || isUsageExpanded) && (
             <div className={styles["usageDetails"]}>
               <div className={styles["usageDetailRow"]}>
-                <span className={styles["usageDetailText"]}>Total generations</span>
+                <span className={styles["usageDetailText"]}>Total generations per month</span>
                 <span className={styles["usageDetailText"]}>{card.usage.total}</span>
               </div>
               <div className={styles["usageDetailRow"]}>
-                <span className={styles["usageDetailText"]}>Plan resets</span>
+                <span className={styles["usageDetailText"]}>Generations resets</span>
                 <span className={styles["usageDetailText"]}>{card.usage.resetDate}</span>
               </div>
             </div>
@@ -477,7 +478,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $33.00",
       nextPaymentDate: "Jan 07, 2027",
       nextPaymentDays: 360,
-      planFeature: { count: "10", supportingPoints: standardSupportingPoints },
+      planFeature: {
+        count: "10",
+        primaryPoint: "10 AI generations per month",
+        supportingPoints: standardSupportingPoints,
+      },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -503,7 +508,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
         },
         {
           title: "Switch to annual payments and save 50%",
-          body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
+          body: "Save $198.00/year ($16.50/month) with an annual plan - same unlimited access, half the price.*",
           actions: [
             {
               href: withHash(externalUrls.myAccount, "switch-to-annual"),
@@ -517,7 +522,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       ],
       manageSubscription: sharedManageSubscriptionLinks,
       copyright:
-        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
     "core-monthly-alt": {
       title: "Core Individual Subscription",
@@ -525,7 +530,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $33.00",
       nextPaymentDate: "Jan 07, 2027",
       nextPaymentDays: 360,
-      planFeature: { count: "10" },
+      planFeature: { count: "10", primaryPoint: "10 AI generations per month" },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -551,7 +556,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
         },
         {
           title: "Switch to annual payments and save 50%",
-          body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
+          body: "Save $198.00/year ($16.50/month) with an annual plan - same unlimited access, half the price.*",
           actions: [
             {
               href: withHash(externalUrls.myAccount, "switch-to-annual"),
@@ -565,7 +570,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       ],
       manageSubscription: sharedManageSubscriptionLinks,
       copyright:
-        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
     "core-monthly-v2": {
       title: "Core Individual Subscription",
@@ -575,6 +580,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentDays: 360,
       planFeature: {
         count: "10",
+        primaryPoint: "10 AI generations per month",
         supportingPoints: standardSupportingPoints,
       },
       promoCards: [
@@ -602,7 +608,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
         },
         {
           title: "Switch to annual payments and save 50%",
-          body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
+          body: "Save $198.00/year ($16.50/month) with an annual plan - same unlimited access, half the price.*",
           actions: [
             {
               href: withHash(externalUrls.myAccount, "switch-to-annual"),
@@ -616,7 +622,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       ],
       manageSubscription: sharedManageSubscriptionLinks,
       copyright:
-        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
     "core-annual": {
       title: "Core Individual Subscription",
@@ -624,7 +630,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { count: "10", supportingPoints: standardSupportingPoints },
+      planFeature: {
+        count: "10",
+        primaryPoint: "10 AI generations per month",
+        supportingPoints: standardSupportingPoints,
+      },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -651,7 +661,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       ],
       manageSubscription: sharedManageSubscriptionLinks,
       copyright:
-        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
     "core-annual-alt": {
       title: "Core Individual Subscription",
@@ -659,7 +669,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { count: "10" },
+      planFeature: { count: "10", primaryPoint: "10 AI generations per month" },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -686,7 +696,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       ],
       manageSubscription: sharedManageSubscriptionLinks,
       copyright:
-        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
     "core-annual-v2": {
       title: "Core Individual Subscription",
@@ -694,7 +704,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { count: "10", supportingPoints: standardSupportingPoints },
+      planFeature: {
+        count: "10",
+        primaryPoint: "10 AI generations per month",
+        supportingPoints: standardSupportingPoints,
+      },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -721,7 +735,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       ],
       manageSubscription: sharedManageSubscriptionLinks,
       copyright:
-        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
     "plus-monthly": {
       title: "Plus Individual Subscription",
@@ -729,7 +743,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $33.00",
       nextPaymentDate: "Jan 07, 2027",
       nextPaymentDays: 360,
-      planFeature: { count: "100", supportingPoints: standardSupportingPoints },
+      planFeature: {
+        count: "100",
+        primaryPoint: "100 AI generations per month",
+        supportingPoints: standardSupportingPoints,
+      },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -748,7 +766,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
         },
         {
           title: "Switch to annual payments and save 50%",
-          body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
+          body: "Save $198.00/year ($16.50/month) with an annual plan - same unlimited access, half the price.*",
           actions: [
             {
               href: withHash(externalUrls.myAccount, "switch-to-annual"),
@@ -762,7 +780,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       ],
       manageSubscription: sharedManageSubscriptionLinks,
       copyright:
-        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
     "plus-monthly-alt": {
       title: "Plus Individual Subscription",
@@ -770,7 +788,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $33.00",
       nextPaymentDate: "Jan 07, 2027",
       nextPaymentDays: 360,
-      planFeature: { count: "100" },
+      planFeature: { count: "100", primaryPoint: "100 AI generations per month" },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -789,7 +807,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
         },
         {
           title: "Switch to annual payments and save 50%",
-          body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
+          body: "Save $198.00/year ($16.50/month) with an annual plan - same unlimited access, half the price.*",
           actions: [
             {
               href: withHash(externalUrls.myAccount, "switch-to-annual"),
@@ -803,7 +821,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       ],
       manageSubscription: sharedManageSubscriptionLinks,
       copyright:
-        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
     "plus-monthly-v2": {
       title: "Plus Individual Subscription",
@@ -811,7 +829,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $33.00",
       nextPaymentDate: "Jan 07, 2027",
       nextPaymentDays: 360,
-      planFeature: { count: "100", supportingPoints: standardSupportingPoints },
+      planFeature: {
+        count: "100",
+        primaryPoint: "100 AI generations per month",
+        supportingPoints: standardSupportingPoints,
+      },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -830,7 +852,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
         },
         {
           title: "Switch to annual payments and save 50%",
-          body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
+          body: "Save $198.00/year ($16.50/month) with an annual plan - same unlimited access, half the price.*",
           actions: [
             {
               href: withHash(externalUrls.myAccount, "switch-to-annual"),
@@ -844,7 +866,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       ],
       manageSubscription: sharedManageSubscriptionLinks,
       copyright:
-        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
     "plus-annual": {
       title: "Plus Individual Subscription",
@@ -852,7 +874,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { count: "100", supportingPoints: standardSupportingPoints },
+      planFeature: {
+        count: "100",
+        primaryPoint: "100 AI generations per month",
+        supportingPoints: standardSupportingPoints,
+      },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -872,7 +898,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       ],
       manageSubscription: sharedManageSubscriptionLinks,
       copyright:
-        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
     "plus-annual-alt": {
       title: "Plus Individual Subscription",
@@ -880,7 +906,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { count: "100" },
+      planFeature: { count: "100", primaryPoint: "100 AI generations per month" },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -900,7 +926,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       ],
       manageSubscription: sharedManageSubscriptionLinks,
       copyright:
-        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
     "plus-annual-v2": {
       title: "Plus Individual Subscription",
@@ -908,7 +934,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { count: "100", supportingPoints: standardSupportingPoints },
+      planFeature: {
+        count: "100",
+        primaryPoint: "100 AI generations per month",
+        supportingPoints: standardSupportingPoints,
+      },
       promoCards: [
         {
           title: "Elevate your plan!",
@@ -928,7 +958,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       ],
       manageSubscription: sharedManageSubscriptionLinks,
       copyright:
-        "© 2023 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
     },
     "ultimate-monthly": {
       title: "Ultimate Individual Subscription",
@@ -936,11 +966,15 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $33.00",
       nextPaymentDate: "Jan 07, 2027",
       nextPaymentDays: 360,
-      planFeature: { badge: "Unlimited", supportingPoints: standardSupportingPoints },
+      planFeature: {
+        badge: "Unlimited",
+        primaryPoint: "Unlimited AI generations per month",
+        supportingPoints: standardSupportingPoints,
+      },
       promoCards: [
         {
           title: "Switch to annual payments and save 50%",
-          body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
+          body: "Save $198.00/year ($16.50/month) with an annual plan - same unlimited access, half the price.*",
           actions: [
             {
               href: withHash(externalUrls.myAccount, "switch-to-annual"),
@@ -962,11 +996,15 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $33.00",
       nextPaymentDate: "Jan 07, 2027",
       nextPaymentDays: 360,
-      planFeature: { badge: "Unlimited", supportingPoints: standardSupportingPoints },
+      planFeature: {
+        badge: "Unlimited",
+        primaryPoint: "Unlimited AI generations per month",
+        supportingPoints: standardSupportingPoints,
+      },
       promoCards: [
         {
           title: "Switch to annual payments and save 50%",
-          body: "Save $198.00/year ($16.50/month) with an annual plan, same unlimited access, half the price.",
+          body: "Save $198.00/year ($16.50/month) with an annual plan - same unlimited access, half the price.*",
           actions: [
             {
               href: withHash(externalUrls.myAccount, "switch-to-annual"),
@@ -988,7 +1026,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { badge: "Unlimited", supportingPoints: standardSupportingPoints },
+      planFeature: {
+        badge: "Unlimited",
+        primaryPoint: "Unlimited AI generations per month",
+        supportingPoints: standardSupportingPoints,
+      },
       promoCards: [],
       manageSubscription: ultimateManageSubscriptionLinks,
       copyright:
@@ -1000,7 +1042,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       nextPaymentAmount: "USD $00.00",
       nextPaymentDate: "Nov 27, 2025",
       nextPaymentDays: 360,
-      planFeature: { badge: "Unlimited", supportingPoints: standardSupportingPoints },
+      planFeature: {
+        badge: "Unlimited",
+        primaryPoint: "Unlimited AI generations per month",
+        supportingPoints: standardSupportingPoints,
+      },
       promoCards: [],
       manageSubscription: ultimateManageSubscriptionLinks,
       copyright:
@@ -1107,37 +1153,25 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                   isAnnualVariant ? styles["annualDescription"] : ""
                 }`}
               >
-                Your subscription renews <strong>{config.renewalCadence}</strong>.
-                {" "}Your next payment of <strong>{config.nextPaymentAmount}</strong>
-                {" "}(excluding tax and discounts) is scheduled for{" "}
-                <strong>{config.nextPaymentDate}</strong>
-                {isAnnualVariant || isRefreshedV2Variant ? (
-                  <> {"\u2014"} in {config.nextPaymentDays} days.</>
-                ) : (
-                  <> in {config.nextPaymentDays} days.</>
-                )}
+                Your subscription renews <strong>{config.renewalCadence}</strong>. Your
+                next payment of <strong>{config.nextPaymentAmount}</strong> (excluding
+                tax and discounts) is scheduled for{" "}
+                <strong>{config.nextPaymentDate}</strong> {"\u2014"} in{" "}
+                {config.nextPaymentDays} days.
               </p>
 
-              <div className={styles["planFeature"]}>
-                <span className={styles["planFeatureIcon"]}>
-                  <Icon name="ai-labs" size="1x" />
-                </span>
-                <div className={styles["planFeatureText"]}>
-                  <span>Includes</span>
-                  {config.planFeature.badge ? (
-                    <span className={styles["featureBadge"]}>
-                      {config.planFeature.badge}
-                    </span>
-                  ) : (
-                    <strong>{config.planFeature.count}</strong>
-                  )}
-                  <span>AI generations</span>
-                </div>
-              </div>
-
-              {config.planFeature.supportingPoints?.length ? (
+              <div className={styles["planFeatureBlock"]}>
+                <p className={styles["planFeatureTitle"]}>Includes:</p>
                 <div className={styles["planFeatureSupportingPoints"]}>
-                  {config.planFeature.supportingPoints.map((point) => (
+                  {config.planFeature.primaryPoint ? (
+                    <div className={styles["planFeatureSupportingPoint"]}>
+                      <span className={styles["planFeatureIcon"]}>
+                        <Icon name="ai-labs" size="1x" />
+                      </span>
+                      <span>{config.planFeature.primaryPoint}</span>
+                    </div>
+                  ) : null}
+                  {config.planFeature.supportingPoints?.map((point) => (
                     <div className={styles["planFeatureSupportingPoint"]} key={point}>
                       <span className={styles["planFeatureIcon"]}>
                         <Icon name="checkmark-circle-outlined" size="1x" />
@@ -1146,7 +1180,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                     </div>
                   ))}
                 </div>
-              ) : null}
+              </div>
             </div>
 
             {config.promoCards.length > 0 ? (
