@@ -333,14 +333,18 @@
   font-weight: 600;
   letter-spacing: 0;
   line-height: 1;
-  margin: 0;
+  margin: 0 0 24px;
 }
 
 .description {
   font-size: 16px;
   line-height: 1.5;
   margin: 0;
-  max-width: 640px;
+  max-width: 860px;
+}
+
+.descriptionAfterFeatures {
+  margin-top: 48px;
 }
 
 .annualDescription {
@@ -356,8 +360,9 @@
 .planFeatureBlock {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 16px;
+  max-width: 760px;
+  margin-top: 0;
 }
 
 .planFeatureTitle {
@@ -371,37 +376,36 @@
   align-items: center;
   display: inline-flex;
   flex: 0 0 auto;
-  height: 20px;
+  height: 24px;
   justify-content: center;
-  width: 20px;
+  width: 24px;
 }
 
 .planFeatureIcon :global(svg),
 .planFeatureIcon img {
   display: block;
-  height: 20px;
-  width: 20px;
+  height: 24px;
+  width: 24px;
 }
 
 .planFeatureSupportingPoints {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   margin-top: 0;
 }
 
 .planFeatureSupportingPoint {
-  align-items: center;
+  align-items: flex-start;
   display: inline-flex;
-  gap: 8px;
-  font-size: 14px;
+  gap: 12px;
+  font-size: 16px;
   line-height: 1.5;
 }
 
 .planFeatureSupportingPoint > span:last-child {
-  align-items: center;
-  display: inline-flex;
-  min-height: 20px;
+  display: block;
+  min-height: 24px;
 }
 
 .heroCards {

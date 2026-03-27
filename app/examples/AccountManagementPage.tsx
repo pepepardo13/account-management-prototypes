@@ -1148,17 +1148,6 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
             >
               <p className={styles["eyebrow"]}>Current Plan</p>
               <h1 className={styles["pageTitle"]}>{config.title}</h1>
-              <p
-                className={`${styles["description"]} ${
-                  isAnnualVariant ? styles["annualDescription"] : ""
-                }`}
-              >
-                Your subscription renews <strong>{config.renewalCadence}</strong>. Your
-                next payment of <strong>{config.nextPaymentAmount}</strong> (excluding
-                tax and discounts) is scheduled for{" "}
-                <strong>{config.nextPaymentDate}</strong> {"\u2014"} in{" "}
-                {config.nextPaymentDays} days.
-              </p>
 
               <div className={styles["planFeatureBlock"]}>
                 <p className={styles["planFeatureTitle"]}>Includes:</p>
@@ -1181,6 +1170,18 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                   ))}
                 </div>
               </div>
+
+              <p
+                className={`${styles["description"]} ${styles["descriptionAfterFeatures"]} ${
+                  isAnnualVariant ? styles["annualDescription"] : ""
+                }`}
+              >
+                Your subscription renews <strong>{config.renewalCadence}</strong>. Your
+                next payment of <strong>{config.nextPaymentAmount}</strong> (excluding
+                tax and discounts) is scheduled for{" "}
+                <strong>{config.nextPaymentDate}</strong> {"\u2014"} in{" "}
+                {config.nextPaymentDays} days.
+              </p>
             </div>
 
             {config.promoCards.length > 0 ? (
