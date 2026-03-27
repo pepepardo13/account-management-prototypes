@@ -6,6 +6,8 @@ import { Bleed, Button, Icon } from "@envato/design-system/components";
 import { useExternalUrls } from "../contexts/ExternalUrlsContext.tsx";
 
 import envatoHref from "../components/Navigation/HomeLink/envato.svg";
+import accountAiLabsIcon from "./assets/account-ai-labs.svg";
+import accountCheckCircleIcon from "./assets/account-check-circle.svg";
 
 import styles from "./AccountManagementPage.module.scss";
 const standardSupportingPoints = [
@@ -1171,7 +1173,7 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                       <span
                         className={`${styles["planFeatureIcon"]} ${styles["planFeatureIconAi"]}`}
                       >
-                        <Icon name="ai-labs" size="1x" />
+                        <img alt="" className={styles["planFeatureIconImage"]} src={accountAiLabsIcon} />
                       </span>
                       <span>
                         {config.planFeature.count ? (
@@ -1193,7 +1195,11 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                       <span
                         className={`${styles["planFeatureIcon"]} ${styles["planFeatureIconCheck"]}`}
                       >
-                        <Icon name="checkmark-circle-outlined" size="1x" />
+                        <img
+                          alt=""
+                          className={styles["planFeatureIconImage"]}
+                          src={accountCheckCircleIcon}
+                        />
                       </span>
                       <span>{point}</span>
                     </div>
