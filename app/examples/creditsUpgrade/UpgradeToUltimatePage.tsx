@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 
-import { Bleed, Button, Icon } from "@envato/design-system/components";
+import { Bleed, Button, Icon, Message } from "@envato/design-system/components";
 
 import { useExternalUrls } from "../../contexts/ExternalUrlsContext.tsx";
 import envatoHref from "../../components/Navigation/HomeLink/envato.svg";
@@ -69,13 +69,22 @@ function CreditsDropdown({
         onClick={() => setOpen((current) => !current)}
         type="button"
       >
-        <span>{selectedOption?.label}</span>
-        <Icon name={open ? "chevron-up" : "chevron-down"} size="1x" />
+        <span className={styles["dropdownTriggerLabel"]}>
+          {selectedOption?.label}
+        </span>
+        <span className={styles["dropdownChevron"]}>
+          <Icon
+            height={24}
+            name={open ? "chevron-up" : "chevron-down"}
+            width={24}
+          />
+        </span>
       </button>
       {open ? (
         <div className={styles["dropdownMenu"]} id={listId} role="listbox">
           {options.map((option) => (
             <button
+              aria-selected={option.credits === selected}
               className={`${styles["dropdownOption"]} ${
                 option.credits === selected ? styles["dropdownOptionSelected"] : ""
               }`}
@@ -87,8 +96,10 @@ function CreditsDropdown({
               role="option"
               type="button"
             >
-              <span>{option.label}</span>
-              <span className={styles["dropdownPrice"]}>{option.priceLabel}</span>
+              <span className={styles["dropdownOptionLabel"]}>{option.label}</span>
+              <span className={styles["dropdownOptionPrice"]}>
+                {option.priceLabel}
+              </span>
             </button>
           ))}
         </div>
@@ -163,6 +174,68 @@ export function UpgradeToUltimatePage({
     "The credit from your current plan and the total amount shown are estimates. When you upgrade, you'll receive credit for the unused portion of your current plan, so you'll only pay the prorated difference. The final amount may vary slightly as charges are calculated when you confirm your upgrade. The exact amounts will appear on your invoice.",
   );
 
+  const monthlyLabel = useEditableCopy(`${prefix}.monthlyLabel`, "Monthly");
+  const monthlyPrice = useEditableCopy(
+    `${prefix}.monthlyPrice`,
+    "$299/m + local tax",
+  );
+  const annualLabel = useEditableCopy(`${prefix}.annualLabel`, "Annual");
+  const saveBadge = useEditableCopy(`${prefix}.saveBadge`, "Save 50%");
+  const annualPrice = useEditableCopy(
+    `${prefix}.annualPrice`,
+    "$XX.XX/m + local tax",
+  );
+  const annualBilled = useEditableCopy(
+    `${prefix}.annualBilled`,
+    "Billed annually at $XXX.XX/year + local tax",
+  );
+
+  const newPlanPriceLabel = useEditableCopy(
+    `${prefix}.newPlanPriceLabel`,
+    "New plan price",
+  );
+  const newPlanPriceValue = useEditableCopy(
+    `${prefix}.newPlanPriceValue`,
+    "$00.00/year",
+  );
+  const gstLabel = useEditableCopy(`${prefix}.gstLabel`, "GST");
+  const gstValue = useEditableCopy(`${prefix}.gstValue`, "$0.00/year");
+  const totalLabel = useEditableCopy(
+    `${prefix}.totalLabel`,
+    "Total ongoing new plan price",
+  );
+  const totalValue = useEditableCopy(`${prefix}.totalValue`, "USD $00.00/year");
+  const chargeNote = useEditableCopy(
+    `${prefix}.chargeNote`,
+    "From Jul 4, 2026, you'll be charged USD $00.00. Your plan renews monthly.",
+  );
+  const proRataHeading = useEditableCopy(
+    `${prefix}.proRataHeading`,
+    "Pro-rata charges for the remainder of this billing period",
+  );
+  const proRataChargeLabel = useEditableCopy(
+    `${prefix}.proRataChargeLabel`,
+    "Pro-rata charge for new plan, incl. tax",
+  );
+  const proRataChargeValue = useEditableCopy(
+    `${prefix}.proRataChargeValue`,
+    "$00.00",
+  );
+  const creditLabel = useEditableCopy(
+    `${prefix}.creditLabel`,
+    "Credit from current plan, incl. tax",
+  );
+  const creditDays = useEditableCopy(
+    `${prefix}.creditDays`,
+    "(6 days remaining in your billing period)",
+  );
+  const creditValue = useEditableCopy(`${prefix}.creditValue`, "-$00.00");
+  const payTodayLabel = useEditableCopy(
+    `${prefix}.payTodayLabel`,
+    "What you will pay today",
+  );
+  const payTodayValue = useEditableCopy(`${prefix}.payTodayValue`, "USD $00.00");
+
   const selectedOption =
     journey.creditOptions.find((option) => option.credits === selectedCredits) ??
     journey.creditOptions[0];
@@ -198,14 +271,13 @@ export function UpgradeToUltimatePage({
 
           <h1 className={styles["title"]}>{pageTitle}</h1>
 
-          <div className={styles["infoBanner"]}>
-            <Icon name="info" size="1x" />
-            <div>
-              <p className={styles["bannerTitle"]}>
-                <strong>{bannerTitle}</strong>
-              </p>
-              <p className={styles["bannerBody"]}>{bannerDetail}</p>
-            </div>
+          <div className={styles["infoMessage"]}>
+            <Message variant="info">
+              <span className={styles["bannerText"]}>
+                <span className={styles["bannerTitle"]}>{bannerTitle}</span>
+                <span className={styles["bannerBody"]}>{bannerDetail}</span>
+              </span>
+            </Message>
           </div>
 
           <section className={styles["section"]}>
@@ -221,9 +293,8 @@ export function UpgradeToUltimatePage({
               />
             ) : (
               <div className={styles["fixedCreditsBox"]}>
-                <strong>
-                  {selectedOption?.label} - {selectedOption?.priceLabel}
-                </strong>
+                <strong>{selectedOption?.label}</strong> -{" "}
+                {selectedOption?.priceLabel}
               </div>
             )}
           </section>
@@ -244,8 +315,8 @@ export function UpgradeToUltimatePage({
                   }`}
                 />
                 <span className={styles["billingCardBody"]}>
-                  <strong>Monthly</strong>
-                  <span>$299/m + local tax</span>
+                  <strong>{monthlyLabel}</strong>
+                  <span>{monthlyPrice}</span>
                 </span>
               </button>
               <button
@@ -262,13 +333,11 @@ export function UpgradeToUltimatePage({
                 />
                 <span className={styles["billingCardBody"]}>
                   <span className={styles["billingCardTitleRow"]}>
-                    <strong>Annual</strong>
-                    <span className={styles["savePill"]}>Save 50%</span>
+                    <strong>{annualLabel}</strong>
+                    <span className={styles["savePill"]}>{saveBadge}</span>
                   </span>
-                  <span>$XX.XX/m + local tax</span>
-                  <span className={styles["billingHelper"]}>
-                    Billed annually at $XXX.XX/year + local tax
-                  </span>
+                  <span>{annualPrice}</span>
+                  <span className={styles["billingHelper"]}>{annualBilled}</span>
                 </span>
               </button>
             </div>
@@ -281,72 +350,88 @@ export function UpgradeToUltimatePage({
                 <MastercardMark />
                 <span>{paymentValue}</span>
               </div>
-              <Button size="medium" variant="secondary">
-                {updatePayment}
-              </Button>
+              <span className={styles["updatePaymentButton"]}>
+                <Button
+                  icon="open-in-new"
+                  iconPosition="leading"
+                  size="large"
+                  variant="secondary"
+                >
+                  {updatePayment}
+                </Button>
+              </span>
             </div>
           </section>
 
           <section className={styles["section"]}>
-            <h3 className={styles["subheading"]}>{summaryHeading}</h3>
-            <div className={styles["summaryRow"]}>
-              <span>New plan price</span>
-              <span>$00.00/year</span>
+            <div className={styles["summaryHeadingBlock"]}>
+              <h3 className={styles["subheading"]}>{summaryHeading}</h3>
+              <div className={styles["summaryRow"]}>
+                <span>{newPlanPriceLabel}</span>
+                <span>{newPlanPriceValue}</span>
+              </div>
+              <div className={styles["summaryRow"]}>
+                <span>{gstLabel}</span>
+                <span>{gstValue}</span>
+              </div>
             </div>
-            <div className={styles["summaryRow"]}>
-              <span>GST</span>
-              <span>$0.00/year</span>
-            </div>
-            <div className={`${styles["summaryRow"]} ${styles["summaryTotal"]}`}>
-              <span>Total ongoing new plan price</span>
-              <span>USD $00.00/year</span>
-            </div>
-            <p className={styles["summaryNote"]}>
-              From Jul 4, 2026, you&apos;ll be charged USD $00.00. Your plan renews{" "}
-              {billingCycle === "monthly" ? "monthly" : "annually"}.
-            </p>
 
-            <h3 className={styles["subheading"]}>
-              Pro-rata charges for the remainder of this billing period
-            </h3>
-            <div className={styles["summaryRow"]}>
-              <span>Pro-rata charge for new plan, incl. tax</span>
-              <span>$00.00</span>
-            </div>
-            <div className={`${styles["summaryRow"]} ${styles["summaryCredit"]}`}>
-              <span>
-                Credit from current plan, incl. tax
-                <small>(6 days remaining in your billing period)</small>
-              </span>
-              <span>-$00.00</span>
-            </div>
+            <div className={styles["summaryDivider"]} />
+
             <div className={`${styles["summaryRow"]} ${styles["summaryTotal"]}`}>
-              <span>What you will pay today</span>
-              <span>USD $00.00</span>
+              <span>{totalLabel}</span>
+              <span>{totalValue}</span>
+            </div>
+            <p className={styles["summaryNote"]}>{chargeNote}</p>
+
+            <div className={styles["summaryDivider"]} />
+
+            <div className={styles["summaryHeadingBlock"]}>
+              <h3 className={styles["subheading"]}>{proRataHeading}</h3>
+              <div className={styles["summaryRow"]}>
+                <span>{proRataChargeLabel}</span>
+                <span>{proRataChargeValue}</span>
+              </div>
+              <div className={`${styles["summaryRow"]} ${styles["summaryCredit"]}`}>
+                <span>
+                  {creditLabel}
+                  <small>{creditDays}</small>
+                </span>
+                <span>{creditValue}</span>
+              </div>
+              <div className={`${styles["summaryRow"]} ${styles["summaryTotal"]}`}>
+                <span>{payTodayLabel}</span>
+                <span>{payTodayValue}</span>
+              </div>
             </div>
           </section>
 
           <div className={styles["startRow"]}>
-            <Icon name="done" size="1x" />
+            <Icon height={24} name="checkmark-circle-outlined" width={24} />
             <span>{startRightAway}</span>
           </div>
 
           <div className={styles["actions"]}>
-            <Button
-              onClick={() => onConfirm(selectedCredits)}
-              size="medium"
-              variant="primary"
-            >
-              {confirmLabel}
-            </Button>
-            <Button onClick={onCancel} size="medium" variant="secondary">
-              {cancelLabel}
-            </Button>
+            <span className={styles["confirmButton"]}>
+              <Button
+                onClick={() => onConfirm(selectedCredits)}
+                size="large"
+                variant="primary"
+              >
+                {confirmLabel}
+              </Button>
+            </span>
+            <span className={styles["cancelButton"]}>
+              <Button onClick={onCancel} size="large" variant="secondary">
+                {cancelLabel}
+              </Button>
+            </span>
           </div>
 
-          <div className={styles["infoBanner"]}>
-            <Icon name="info" size="1x" />
-            <p className={styles["bannerBody"]}>{estimateCopy}</p>
+          <div className={styles["infoMessage"]}>
+            <Message variant="info">
+              <p className={styles["bannerBody"]}>{estimateCopy}</p>
+            </Message>
           </div>
         </main>
       </div>

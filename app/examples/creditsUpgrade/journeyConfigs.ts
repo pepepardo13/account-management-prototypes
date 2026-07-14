@@ -204,6 +204,22 @@ export const journeyConfigs: Record<JourneyId, JourneyConfig> = {
   },
 };
 
+/**
+ * Resolves the upgrade journey that applies when the user currently owns the
+ * given credit tier, i.e. the journey whose starting plan matches `credits`.
+ * Returns `undefined` for the top tier (2000), where no further upgrade exists.
+ * This lets the journeys chain together (Plus → 500 → 1000 → 2000) so the
+ * correct current-plan banner, source state and upgrade options are applied at
+ * every step without returning to the hub.
+ */
+export function journeyFromCurrentCredits(
+  credits: CreditTiers,
+): JourneyConfig | undefined {
+  return Object.values(journeyConfigs).find(
+    (journey) => journey.source.creditTotal === credits,
+  );
+}
+
 export function planStateForCredits(
   journey: JourneyConfig,
   credits: CreditTiers,

@@ -443,6 +443,140 @@
   min-height: 0;
 }
 
+.creditsBadge {
+  align-items: center;
+  background: #191919;
+  border-radius: 50px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 600;
+  justify-content: center;
+  letter-spacing: 0.28px;
+  line-height: 1.5;
+  margin-right: 8px;
+  padding: 0 8px;
+}
+
+.paymentMethodBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.paymentMethodLabel {
+  color: var(--text-secondary);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.paymentMethodRow {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+.paymentMethodValue {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.mastercard {
+  align-items: center;
+  border: 1px solid #ececee;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: inline-flex;
+  height: 24px;
+  justify-content: center;
+  position: relative;
+  width: 40px;
+}
+
+.mastercardLeft,
+.mastercardRight {
+  border-radius: 50%;
+  height: 14px;
+  width: 14px;
+}
+
+.mastercardLeft {
+  background: #eb001b;
+  margin-right: -5px;
+}
+
+.mastercardRight {
+  background: #f79e1b;
+  mix-blend-mode: multiply;
+}
+
+/*
+ * Constrain the plan title to the width of the hero text column (matching the
+ * Figma layout, where the promo cards take the right side). This lets the
+ * longer Ultimate titles wrap onto two lines while "Plus Individual
+ * Subscription" stays on one.
+ */
+.page[data-variant^="credits-"] .pageTitle {
+  margin-bottom: 32px;
+  max-width: 534px;
+}
+
+.page[data-variant^="credits-"] .promoCard {
+  border-radius: 4px;
+}
+
+.page[data-variant^="credits-"] .cardActions :global(button),
+.page[data-variant^="credits-"] .annualButton :global(button) {
+  border-radius: 4px;
+}
+
+/*
+ * Hero geometry for the "beginning of journey" overview pages, matched 1:1 to
+ * the Figma frames. The hero content row is 1312px wide with a 40px
+ * (spacing-6x) gap; the plan column grows to fill the left side so the promo
+ * cards sit flush against the right edge; and each promo card is 365×345 with
+ * 32px horizontal / 24px vertical padding and a 25px internal gap.
+ */
+.page[data-variant^="credits-"] .heroInner {
+  gap: 40px;
+}
+
+.page[data-variant^="credits-"] .planSummary {
+  flex: 1 1 auto;
+  max-width: none;
+  min-width: 0;
+  width: auto;
+}
+
+.page[data-variant^="credits-"] .plusMonthlyHeroCards {
+  gap: 40px;
+  grid-template-columns: repeat(2, 365px);
+}
+
+.page[data-variant^="credits-"] .plusMonthlyHeroCards.heroCardsSingle {
+  grid-template-columns: 365px;
+}
+
+.page[data-variant^="credits-"] .plusMonthlyHeroCards .promoCard {
+  gap: 25px;
+  height: 345px;
+  max-height: 345px;
+  min-height: 345px;
+  padding: 24px 32px;
+}
+
+/*
+ * The Figma body panel sits flush against the hero (no gap) with symmetric
+ * 64px (spacing-7x) vertical padding, unlike the default overview panel.
+ */
+.page[data-variant^="credits-"] .bodyPanel {
+  margin-top: 0;
+  padding-bottom: 64px;
+}
+
 .heroCards {
   display: grid;
   flex: 0 0 auto;

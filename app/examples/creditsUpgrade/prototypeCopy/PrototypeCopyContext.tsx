@@ -12,12 +12,20 @@ const STORAGE_KEY = "credits-upgrade-prototype-copy";
 
 export type CopyMap = Record<string, string>;
 
+// A list of key prefixes that are "active" for the screen/state currently on
+// screen. `null` means show everything. Scoping by prefix (rather than by a
+// coarse screen name) ensures that only the current plan tier's copy is shown,
+// so fields don't appear multiple times once several tiers have been visited.
+export type CopyScope = string[] | null;
+
 type PrototypeCopyContextValue = {
   getCopy: (key: string, fallback: string) => string;
   entries: Array<{ key: string; value: string; fallback: string }>;
   registerDefaults: (defaults: CopyMap) => void;
   resetAll: () => void;
+  scope: CopyScope;
   setCopy: (key: string, value: string) => void;
+  setScope: (scope: CopyScope) => void;
 };
 
 const PrototypeCopyContext = createContext<PrototypeCopyContextValue | null>(
@@ -51,9 +59,13 @@ function writeStored(map: CopyMap) {
 export function PrototypeCopyProvider({ children }: { children: ReactNode }) {
   const [overrides, setOverrides] = useState<CopyMap>(() => readStored());
   const [defaults, setDefaults] = useState<CopyMap>({});
+  const [scope, setScope] = useState<CopyScope>(null);
 
   const registerDefaults = useCallback((next: CopyMap) => {
-    setDefaults((current) => ({ ...current, ...next }));
+    setDefaults((current) => {
+      const hasChange = Object.keys(next).some((key) => current[key] !== next[key]);
+      return hasChange ? { ...current, ...next } : current;
+    });
   }, []);
 
   const setCopy = useCallback((key: string, value: string) => {
@@ -100,9 +112,11 @@ export function PrototypeCopyProvider({ children }: { children: ReactNode }) {
       entries,
       registerDefaults,
       resetAll,
+      scope,
       setCopy,
+      setScope,
     }),
-    [entries, getCopy, registerDefaults, resetAll, setCopy],
+    [entries, getCopy, registerDefaults, resetAll, scope, setCopy],
   );
 
   return (

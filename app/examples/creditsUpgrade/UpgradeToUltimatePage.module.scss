@@ -1,5 +1,5 @@
 .page {
-  background: #f3f3f3;
+  background: #ffffff;
   color: #191919;
   font-family: "PolySans", sans-serif;
   min-height: 100vh;
@@ -7,103 +7,122 @@
 
 .topBar {
   background: #191919;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
 
 .topBarInner {
   align-items: center;
   display: flex;
-  height: 64px;
   justify-content: space-between;
   margin: 0 auto;
-  max-width: 960px;
-  padding: 0 24px;
+  max-width: 1440px;
+  min-height: 56px;
+  padding: 8px 32px;
+}
+
+.logoLink {
+  align-items: center;
+  display: inline-flex;
 }
 
 .logoLink img {
   display: block;
-  height: 20px;
+  height: 24px;
+  width: auto;
 }
 
 .profileButton {
   align-items: center;
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: #cccccc;
   cursor: pointer;
   display: flex;
+  font: inherit;
   font-size: 14px;
-  gap: 8px;
+  gap: 4px;
 }
 
 .main {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   margin: 0 auto;
-  max-width: 760px;
-  padding: 32px 24px 80px;
+  max-width: 700px;
+  padding: 16px 24px 64px;
 }
 
 .backButton {
   align-items: center;
   background: #ffffff;
-  border: 1px solid #d0d0d0;
-  border-radius: 999px;
+  border: 1px solid #cccccc;
+  border-radius: 50px;
   cursor: pointer;
   display: inline-flex;
-  height: 40px;
+  height: 48px;
   justify-content: center;
-  margin-bottom: 24px;
-  width: 40px;
+  width: 48px;
 }
 
 .title {
-  font-size: 36px;
+  font-size: 30px;
   font-weight: 600;
-  line-height: 1.15;
-  margin: 0 0 24px;
+  line-height: 1;
+  margin: 0;
 }
 
-.infoBanner {
-  align-items: flex-start;
-  background: #e8eefc;
-  border-radius: 8px;
+/* The DS Message defaults to a larger radius; the Figma uses roundness-subtle (4px). */
+.infoMessage > :global(div) {
+  border-radius: 4px;
+}
+
+.bannerText {
   display: flex;
-  gap: 12px;
-  margin-bottom: 28px;
-  padding: 16px;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .bannerTitle {
-  font-size: 14px;
-  margin: 0 0 4px;
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
 }
 
 .bannerBody {
-  font-size: 14px;
-  line-height: 1.45;
+  display: block;
+  font-size: 16px;
+  line-height: 1.5;
   margin: 0;
 }
 
 .section {
-  margin-bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .sectionTitle {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
-  margin: 0 0 16px;
+  line-height: 1;
+  margin: 0;
 }
 
 .subheading {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  margin: 0 0 8px;
+  line-height: 1.5;
+  margin: 0;
 }
 
 .helper {
-  color: #555555;
-  font-size: 14px;
-  line-height: 1.45;
-  margin: 0 0 12px;
+  color: #666666;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: -8px 0 0;
 }
 
 .dropdown {
@@ -113,80 +132,117 @@
 .dropdownTrigger {
   align-items: center;
   background: #ffffff;
-  border: 1px solid #cfcfcf;
-  border-radius: 8px;
+  border: 1px solid #8c8c8c;
+  border-radius: 4px;
+  color: #191919;
   cursor: pointer;
   display: flex;
   font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  gap: 8px;
+  height: 48px;
   justify-content: space-between;
-  padding: 14px 16px;
+  overflow: hidden;
+  padding: 0 16px;
   width: 100%;
+}
+
+.dropdownTriggerLabel {
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdownChevron {
+  align-items: center;
+  color: #191919;
+  display: inline-flex;
+  flex-shrink: 0;
+  height: 24px;
+  justify-content: center;
+  width: 24px;
 }
 
 .dropdownMenu {
   background: #ffffff;
-  border: 1px solid #cfcfcf;
+  border: 1px solid #e6e6e6;
   border-radius: 8px;
   box-shadow: 0 12px 32px rgba(25, 25, 25, 0.12);
   margin-top: 4px;
   overflow: hidden;
+  padding: 8px 0;
   position: absolute;
   width: 100%;
   z-index: 5;
 }
 
 .dropdownOption {
+  align-items: flex-start;
   background: #ffffff;
   border: none;
-  border-bottom: 1px solid #efefef;
+  color: #191919;
   cursor: pointer;
   display: flex;
+  flex-direction: column;
   font: inherit;
-  justify-content: space-between;
-  padding: 14px 16px;
+  gap: 2px;
+  padding: 12px 24px;
   text-align: left;
   width: 100%;
 }
 
-.dropdownOption:last-child {
-  border-bottom: none;
+.dropdownOption:hover {
+  background: #f6f7f9;
 }
 
 .dropdownOptionSelected {
-  background: #f3f3f3;
+  background: #f2f3f5;
 }
 
-.dropdownPrice {
-  color: #555555;
-  white-space: nowrap;
+.dropdownOptionLabel {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.dropdownOptionPrice {
+  color: #666666;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .fixedCreditsBox {
   align-items: center;
-  background: #e8e8e8;
-  border-radius: 8px;
+  background: #f3f3f3;
+  border-radius: 4px;
+  color: #191919;
   display: flex;
+  font-size: 16px;
+  gap: 4px;
   justify-content: center;
-  min-height: 56px;
-  padding: 16px;
+  min-height: 48px;
+  padding: 12px 16px;
   text-align: center;
+  width: 100%;
 }
 
 .billingGrid {
   display: grid;
-  gap: 12px;
+  gap: 24px;
   grid-template-columns: 1fr 1fr;
 }
 
 .billingCard {
   align-items: flex-start;
   background: #ffffff;
-  border: 1px solid #cfcfcf;
-  border-radius: 12px;
+  border: 1px solid #666666;
+  border-radius: 4px;
   cursor: pointer;
   display: flex;
-  gap: 12px;
-  padding: 16px;
+  gap: 8px;
+  min-height: 126px;
+  padding: 16px 24px;
   text-align: left;
 }
 
@@ -195,24 +251,36 @@
 }
 
 .radio {
-  border: 2px solid #999999;
-  border-radius: 999px;
-  flex: 0 0 18px;
-  height: 18px;
-  margin-top: 2px;
-  width: 18px;
+  border: 2px solid #8c8c8c;
+  border-radius: 50px;
+  box-sizing: border-box;
+  flex: 0 0 24px;
+  height: 24px;
+  width: 24px;
 }
 
 .radioSelected {
-  background: #191919;
   border-color: #191919;
-  box-shadow: inset 0 0 0 3px #ffffff;
+  box-shadow: inset 0 0 0 5px #ffffff;
+  background: #191919;
 }
 
 .billingCardBody {
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.billingCardBody strong {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.billingCardBody > span:not(.billingCardTitleRow):not(.billingHelper) {
+  color: #666666;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .billingCardTitleRow {
@@ -222,16 +290,23 @@
 }
 
 .savePill {
-  background: #87e64b;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 2px 8px;
+  align-items: center;
+  background: #9cee69;
+  border-radius: 50px;
+  color: #191919;
+  display: inline-flex;
+  font-family: "PolySans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.28px;
+  line-height: 1.5;
+  padding: 0 8px;
 }
 
 .billingHelper {
   color: #666666;
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .paymentRow {
@@ -244,77 +319,145 @@
 .paymentCard {
   align-items: center;
   display: flex;
-  gap: 10px;
+  font-size: 16px;
+  gap: 8px;
 }
 
 .mastercard {
+  align-items: center;
+  border: 1px solid #ececee;
+  border-radius: 4px;
+  box-sizing: border-box;
   display: inline-flex;
-  height: 18px;
-  position: relative;
-  width: 28px;
+  height: 24px;
+  justify-content: center;
+  width: 40px;
 }
 
 .mastercardLeft,
 .mastercardRight {
   border-radius: 50%;
-  height: 18px;
-  position: absolute;
-  top: 0;
-  width: 18px;
+  height: 14px;
+  width: 14px;
 }
 
 .mastercardLeft {
   background: #eb001b;
-  left: 0;
+  margin-right: -5px;
 }
 
 .mastercardRight {
   background: #f79e1b;
-  left: 10px;
-  opacity: 0.9;
+  mix-blend-mode: multiply;
+}
+
+.summaryHeadingBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .summaryRow {
   display: flex;
-  font-size: 14px;
+  font-size: 16px;
+  gap: 8px;
   justify-content: space-between;
-  padding: 8px 0;
+  line-height: 1.5;
 }
 
 .summaryRow small {
-  color: #666666;
+  color: inherit;
   display: block;
   margin-top: 2px;
 }
 
 .summaryTotal {
-  font-weight: 700;
+  font-weight: 600;
+}
+
+.summaryTotal span:first-child {
+  font-size: 18px;
 }
 
 .summaryCredit {
-  color: #1f7a3f;
+  color: #2e7400;
 }
 
 .summaryNote {
   color: #666666;
-  font-size: 13px;
-  line-height: 1.4;
-  margin: 4px 0 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.summaryDivider {
+  border-top: 1px solid #ececee;
+  margin: 0;
 }
 
 .startRow {
   align-items: center;
+  color: #191919;
   display: flex;
+  font-size: 16px;
+  font-weight: 600;
   gap: 8px;
-  margin: 8px 0 16px;
+  line-height: 1.5;
+}
+
+.startRow :global(svg) {
+  flex: 0 0 auto;
+  height: 24px;
+  width: 24px;
 }
 
 .actions {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
-  max-width: 360px;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.actions :global(button),
+.paymentRow :global(button) {
+  border-radius: 8px;
+}
+
+/* Confirm CTA uses the spark-green promotion surface with black text. */
+.confirmButton :global(button) {
+  background: #9cee69;
+  border-color: #9cee69;
+  color: #191919;
+}
+
+.confirmButton :global(button:hover) {
+  background: #8fe05a;
+  border-color: #8fe05a;
+  color: #191919;
+}
+
+/* Cancel is a plain outlined button: white surface, black border + text. */
+.cancelButton :global(button) {
+  background: #ffffff;
+  border: 1px solid #191919;
+  color: #191919;
+}
+
+.cancelButton :global(button:hover) {
+  background: #f5f5f5;
+  color: #191919;
+}
+
+/* Update payment method: outlined white button with a leading icon. */
+.updatePaymentButton :global(button) {
+  background: #ffffff;
+  border: 1px solid #191919;
+  border-radius: 4px;
+  color: #191919;
+}
+
+.updatePaymentButton :global(button:hover) {
+  background: #f5f5f5;
+  color: #191919;
 }
 
 @media (max-width: 720px) {
@@ -324,6 +467,10 @@
 
   .paymentRow {
     align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .actions {
     flex-direction: column;
   }
 }

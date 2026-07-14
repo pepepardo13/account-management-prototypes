@@ -30,16 +30,16 @@ export const Hub: Story = {
 };
 
 export const PlusToUltimate500: Story = {
-  name: "Plus → Ultimate 500",
+  name: "Plus Individual → Ultimate 2000",
   render: () => <CreditsUpgradeJourneyPage journeyId="plus-to-500" />,
 };
 
 export const Ultimate500To1000: Story = {
-  name: "Ultimate 500 → 1000",
+  name: "Ultimate 500 → Ultimate 2000",
   render: () => <CreditsUpgradeJourneyPage journeyId="500-to-1000" />,
 };
 
 export const Ultimate1000To2000: Story = {
-  name: "Ultimate 1000 → 2000",
+  name: "Ultimate 1000 → Ultimate 2000",
   render: () => <CreditsUpgradeJourneyPage journeyId="1000-to-2000" />,
 };

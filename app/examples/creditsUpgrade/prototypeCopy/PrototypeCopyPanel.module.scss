@@ -1,25 +1,41 @@
 .paletteButton {
   align-items: center;
-  background: #191919;
-  border: none;
-  border-radius: 999px;
+  background: #9cee69;
+  border: 1px solid #191919;
+  border-radius: 50px;
   bottom: 24px;
-  box-shadow: 0 8px 24px rgba(25, 25, 25, 0.24);
-  color: #ffffff;
+  box-shadow: 0 10px 28px rgba(25, 25, 25, 0.22);
+  color: #191919;
   cursor: pointer;
-  display: flex;
-  font-size: 22px;
-  height: 56px;
-  justify-content: center;
+  display: inline-flex;
+  font-family: "PolySans", sans-serif;
+  gap: 8px;
+  height: 48px;
+  padding: 0 20px 0 16px;
   position: fixed;
   right: 24px;
-  width: 56px;
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease;
   z-index: 1000;
 }
 
 .paletteButton:hover,
 .paletteButton:focus-visible {
-  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(25, 25, 25, 0.3);
+  transform: translateY(-2px);
+}
+
+.paletteIcon {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.paletteLabel {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
 }
 
 .panel {
@@ -42,7 +58,7 @@
   border-bottom: 1px solid #e6e6e6;
   display: flex;
   justify-content: space-between;
-  padding: 20px 20px 16px;
+  padding: 20px;
 }
 
 .panelTitle {
@@ -53,42 +69,55 @@
 }
 
 .closeButton {
+  align-items: center;
   background: transparent;
   border: none;
+  color: #191919;
   cursor: pointer;
-  font-size: 28px;
-  line-height: 1;
-  padding: 0 4px;
+  display: inline-flex;
+  justify-content: center;
+  padding: 4px;
 }
 
 .panelHint {
   color: #666666;
+  font-family: "PolySans", sans-serif;
   font-size: 13px;
-  line-height: 1.4;
-  margin: 12px 20px 0;
-}
-
-.panelActions {
-  padding: 12px 20px;
-}
-
-.resetButton {
-  background: #ffffff;
-  border: 1px solid #191919;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 8px 12px;
+  line-height: 1.45;
+  margin: 16px 20px 0;
 }
 
 .fields {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
   overflow: auto;
-  padding: 8px 20px 32px;
+  padding: 16px 20px 24px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionTitle {
+  border-bottom: 1px solid #ececee;
+  color: #191919;
+  font-family: "PolySans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  margin: 0;
+  padding-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.sectionFields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .field {
@@ -97,16 +126,16 @@
   gap: 6px;
 }
 
-.fieldKey {
-  color: #666666;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 11px;
-  word-break: break-all;
+.fieldLabel {
+  color: #191919;
+  font-family: "PolySans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .fieldInput {
   border: 1px solid #d0d0d0;
-  border-radius: 8px;
+  border-radius: 4px;
   font-family: "PolySans", sans-serif;
   font-size: 14px;
   line-height: 1.4;
@@ -115,7 +144,53 @@
   width: 100%;
 }
 
+.fieldInput:focus-visible {
+  border-color: #191919;
+  outline: none;
+}
+
 .empty {
   color: #666666;
+  font-family: "PolySans", sans-serif;
   font-size: 14px;
+}
+
+.panelFooter {
+  align-items: center;
+  border-top: 1px solid #e6e6e6;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+
+.resetButton {
+  background: #ffffff;
+  border: 1px solid #191919;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "PolySans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 16px;
+}
+
+.updateButton {
+  background: #9cee69;
+  border: 1px solid #191919;
+  border-radius: 4px;
+  color: #191919;
+  cursor: pointer;
+  flex: 1;
+  font-family: "PolySans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 16px;
+}
+
+.updateButton:disabled {
+  background: #f0f0f0;
+  border-color: #cccccc;
+  color: #999999;
+  cursor: not-allowed;
 }

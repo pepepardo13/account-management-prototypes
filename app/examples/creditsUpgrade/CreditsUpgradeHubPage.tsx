@@ -9,17 +9,17 @@ type JourneyCard = {
 
 const journeyCards: JourneyCard[] = [
   {
-    name: "Plus → Ultimate 500",
+    name: "Plus Individual → Ultimate 2000",
     period: "Monthly",
     href: "./iframe.html?id=layout-credits-upgrade-journeys--plus-to-ultimate-500&viewMode=story",
   },
   {
-    name: "Ultimate 500 → 1000",
+    name: "Ultimate 500 → Ultimate 2000",
     period: "Monthly",
     href: "./iframe.html?id=layout-credits-upgrade-journeys--ultimate-500-to-1000&viewMode=story",
   },
   {
-    name: "Ultimate 1000 → 2000",
+    name: "Ultimate 1000 → Ultimate 2000",
     period: "Monthly",
     href: "./iframe.html?id=layout-credits-upgrade-journeys--ultimate-1000-to-2000&viewMode=story",
   },

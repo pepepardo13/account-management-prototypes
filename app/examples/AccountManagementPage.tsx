@@ -1,5 +1,5 @@
 import type { iconNames } from "@envato/design-system/components";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { Bleed, Button, Icon } from "@envato/design-system/components";
 
@@ -32,6 +32,8 @@ type FooterLink = {
 type PlanFeature = {
   badge?: string;
   count?: string;
+  creditsBadge?: string;
+  creditsUnit?: string;
   primaryPoint?: string;
   supportingPoints?: string[];
 };
@@ -40,6 +42,7 @@ type PromoAction = {
   external?: boolean;
   href?: string;
   label: string;
+  onClick?: () => void;
   outlined?: boolean;
   radius?: "4px" | "8px";
   variant: "primary" | "secondary";
@@ -65,10 +68,12 @@ type PageConfig = {
   nextPaymentAmount: string;
   nextPaymentDate: string;
   nextPaymentDays: number;
+  paymentMethod?: { value: string };
   planFeature: PlanFeature;
   promoCards: PromoCard[];
   renewalCadence: "monthly" | "annually";
   title: string;
+  usesCredits?: boolean;
 };
 
 export type AccountManagementVariant =
@@ -87,10 +92,18 @@ export type AccountManagementVariant =
   | "ultimate-monthly"
   | "ultimate-monthly-v2"
   | "ultimate-annual"
-  | "ultimate-annual-v2";
+  | "ultimate-annual-v2"
+  | "credits-plus-200"
+  | "credits-ultimate-500"
+  | "credits-ultimate-1000"
+  | "credits-ultimate-2000";
 
 type Props = {
   variant?: AccountManagementVariant;
+  onPrimaryPromoAction?: () => void;
+  disableHubRedirect?: boolean;
+  copyGet?: (key: string, fallback: string) => string;
+  copyRegisterDefaults?: (defaults: Record<string, string>) => void;
 };
 
 type UsageInfo = NonNullable<PromoCard["usage"]>;
@@ -153,6 +166,15 @@ function ActionItem({ action }: { action: ActionLink }) {
 
 function getRemainingGenerations(usage: UsageInfo) {
   return Math.max(Number(usage.total) - Number(usage.current), 0);
+}
+
+function MastercardMark() {
+  return (
+    <span aria-hidden="true" className={styles["mastercard"]}>
+      <span className={styles["mastercardLeft"]} />
+      <span className={styles["mastercardRight"]} />
+    </span>
+  );
 }
 
 function getPrimaryFeatureSuffix(feature: PlanFeature) {
@@ -262,13 +284,18 @@ function PromoCardView({
   hideUsage = false,
   isUsageExpanded = true,
   onToggleUsage,
+  onPrimaryAction,
+  usesCredits = false,
 }: {
   card: PromoCard;
   collapsibleUsage?: boolean;
   hideUsage?: boolean;
   isUsageExpanded?: boolean;
   onToggleUsage?: () => void;
+  onPrimaryAction?: () => void;
+  usesCredits?: boolean;
 }) {
+  const unit = usesCredits ? "AI credits" : "AI generations";
   const remainingGenerations = card.usage ? getRemainingGenerations(card.usage) : 0;
   const hasVisibleUsage = Boolean(card.usage) && !hideUsage;
   const hasSingleActionUsageLayout = hasVisibleUsage && card.actions.length === 1;
@@ -289,7 +316,9 @@ function PromoCardView({
       {hasVisibleUsage && card.usage && (
         <div className={styles["usageMeter"]}>
           <div className={styles["usageMeta"]}>
-            <strong>{remainingGenerations} AI generations remaining</strong>
+            <strong>
+              {remainingGenerations} {unit} remaining
+            </strong>
             {hasCollapsibleUsage ? (
               <button
                 aria-expanded={isUsageExpanded}
@@ -313,11 +342,15 @@ function PromoCardView({
           {(!hasCollapsibleUsage || isUsageExpanded) && (
             <div className={styles["usageDetails"]}>
               <div className={styles["usageDetailRow"]}>
-                <span className={styles["usageDetailText"]}>Total generations per month</span>
+                <span className={styles["usageDetailText"]}>
+                  Total {usesCredits ? "credits" : "generations"} per month
+                </span>
                 <span className={styles["usageDetailText"]}>{card.usage.total}</span>
               </div>
               <div className={styles["usageDetailRow"]}>
-                <span className={styles["usageDetailText"]}>Generations resets</span>
+                <span className={styles["usageDetailText"]}>
+                  {usesCredits ? "Credits reset" : "Generations resets"}
+                </span>
                 <span className={styles["usageDetailText"]}>{card.usage.resetDate}</span>
               </div>
             </div>
@@ -335,43 +368,61 @@ function PromoCardView({
       <div className={styles["cardSpacer"]} />
 
       <div className={styles["cardActions"]}>
-        {card.actions.map((action) => (
-          <div
-            className={[
-              action.outlined ? styles["outlinedButton"] : "",
-              action.radius === "8px" ? styles["annualButton"] : "",
-            ]
-              .filter(Boolean)
-              .join(" ")}
-            key={action.label}
-          >
-            <Button
-              onClick={
-                action.href
-                  ? () => {
-                      navigateToUrl(action.href!, action.external);
-                    }
-                  : undefined
-              }
-              size="large"
-              variant={action.variant}
-              width="full"
+        {card.actions.map((action, index) => {
+          const isPrimaryPromoAction =
+            card.emphasized && index === 0 && Boolean(onPrimaryAction);
+          const handleClick = isPrimaryPromoAction
+            ? onPrimaryAction
+            : action.onClick
+              ? action.onClick
+              : action.href
+                ? () => {
+                    navigateToUrl(action.href!, action.external);
+                  }
+                : undefined;
+
+          return (
+            <div
+              className={[
+                action.outlined ? styles["outlinedButton"] : "",
+                action.radius === "8px" ? styles["annualButton"] : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              key={action.label}
             >
-              {action.label}
-            </Button>
-          </div>
-        ))}
+              <Button
+                onClick={handleClick}
+                size="large"
+                variant={action.variant}
+                width="full"
+              >
+                {action.label}
+              </Button>
+            </div>
+          );
+        })}
       </div>
     </article>
   );
 }
 
-export function AccountManagementPage({ variant = "core-monthly" }: Props) {
+export function AccountManagementPage({
+  variant = "core-monthly",
+  onPrimaryPromoAction,
+  disableHubRedirect = false,
+  copyGet,
+  copyRegisterDefaults,
+}: Props) {
   const externalUrls = useExternalUrls();
   const [isAltUsageExpanded, setIsAltUsageExpanded] = useState(false);
   const [isTopBarUsageExpanded, setIsTopBarUsageExpanded] = useState(false);
 
   useEffect(() => {
+    if (disableHubRedirect) {
+      return;
+    }
+
     const redirectUrl = getPrototypeHubUrl();
 
     if (!redirectUrl) {
@@ -407,8 +458,9 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [disableHubRedirect]);
 
+  const isCreditsVariant = variant.startsWith("credits-");
   const isCoreMonthlyVariant = variant === "core-monthly";
   const isCoreMonthlyAltVariant = variant === "core-monthly-alt";
   const isCoreMonthlyV2Variant = variant === "core-monthly-v2";
@@ -1117,9 +1169,225 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
       copyright:
         "© 2026 Envato Trademarks and brands are the property of their respective owners.",
     },
+    "credits-plus-200": {
+      title: "Plus Individual Subscription",
+      renewalCadence: "monthly",
+      nextPaymentAmount: "USD $00.00",
+      nextPaymentDate: "Jan 07, 2027",
+      nextPaymentDays: 360,
+      usesCredits: true,
+      paymentMethod: { value: "**** **** **** 8757" },
+      planFeature: {
+        creditsBadge: "200",
+        supportingPoints: standardSupportingPoints,
+      },
+      promoCards: [
+        {
+          title: "Elevate your plan!",
+          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
+          ctaHref: pricingUrl,
+          ctaLabel: "Explore more",
+          emphasized: true,
+          usage: { current: "100", total: "200", resetDate: "14 August, 2026" },
+          actions: [{ label: "Upgrade to Ultimate", variant: "primary" }],
+        },
+        {
+          title: "Switch to annual payments and save 50%",
+          body: "Save $198.00/year ($16.50/month) with an annual plan – same unlimited access, half the price.",
+          actions: [
+            {
+              href: withHash(externalUrls.myAccount, "switch-to-annual"),
+              label: "Switch to annual",
+              outlined: true,
+              radius: "8px",
+              variant: "secondary",
+            },
+          ],
+        },
+      ],
+      manageSubscription: sharedManageSubscriptionLinks,
+      copyright:
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+    },
+    "credits-ultimate-500": {
+      title: "Ultimate 500 Individual Subscription",
+      renewalCadence: "monthly",
+      nextPaymentAmount: "USD $00.00",
+      nextPaymentDate: "Jan 07, 2027",
+      nextPaymentDays: 360,
+      usesCredits: true,
+      paymentMethod: { value: "**** **** **** 8757" },
+      planFeature: {
+        creditsBadge: "500",
+        supportingPoints: standardSupportingPoints,
+      },
+      promoCards: [
+        {
+          title: "Elevate your plan!",
+          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
+          ctaHref: pricingUrl,
+          ctaLabel: "Explore more",
+          emphasized: true,
+          usage: { current: "0", total: "500", resetDate: "14 August, 2026" },
+          actions: [{ label: "Get more AI credits", variant: "primary" }],
+        },
+        {
+          title: "Switch to annual payments and save 50%",
+          body: "Save $198.00/year ($16.50/month) with an annual plan – same unlimited access, half the price.",
+          actions: [
+            {
+              href: withHash(externalUrls.myAccount, "switch-to-annual"),
+              label: "Switch to annual",
+              outlined: true,
+              radius: "8px",
+              variant: "secondary",
+            },
+          ],
+        },
+      ],
+      manageSubscription: sharedManageSubscriptionLinks,
+      copyright:
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+    },
+    "credits-ultimate-1000": {
+      title: "Ultimate 1000 Individual Subscription",
+      renewalCadence: "monthly",
+      nextPaymentAmount: "USD $00.00",
+      nextPaymentDate: "Jan 07, 2027",
+      nextPaymentDays: 360,
+      usesCredits: true,
+      paymentMethod: { value: "**** **** **** 8757" },
+      planFeature: {
+        creditsBadge: "1,000",
+        supportingPoints: standardSupportingPoints,
+      },
+      promoCards: [
+        {
+          title: "Elevate your plan!",
+          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
+          ctaHref: pricingUrl,
+          ctaLabel: "Explore more",
+          emphasized: true,
+          usage: { current: "0", total: "1000", resetDate: "14 August, 2026" },
+          actions: [{ label: "Get more AI credits", variant: "primary" }],
+        },
+        {
+          title: "Switch to annual payments and save 50%",
+          body: "Save $198.00/year ($16.50/month) with an annual plan – same unlimited access, half the price.",
+          actions: [
+            {
+              href: withHash(externalUrls.myAccount, "switch-to-annual"),
+              label: "Switch to annual",
+              outlined: true,
+              radius: "8px",
+              variant: "secondary",
+            },
+          ],
+        },
+      ],
+      manageSubscription: sharedManageSubscriptionLinks,
+      copyright:
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+    },
+    "credits-ultimate-2000": {
+      title: "Ultimate 2000 Individual Subscription",
+      renewalCadence: "monthly",
+      nextPaymentAmount: "USD $00.00",
+      nextPaymentDate: "Jan 07, 2027",
+      nextPaymentDays: 360,
+      usesCredits: true,
+      paymentMethod: { value: "**** **** **** 8757" },
+      planFeature: {
+        creditsBadge: "2,000",
+        supportingPoints: standardSupportingPoints,
+      },
+      promoCards: [
+        {
+          title: "Elevate your plan!",
+          body: "You're on our biggest plan and unlock unlimited generations.",
+          ctaHref: pricingUrl,
+          ctaLabel: "Explore more",
+          emphasized: true,
+          usage: { current: "0", total: "2000", resetDate: "14 August, 2026" },
+          actions: [{ label: "Get more AI credits", variant: "primary" }],
+        },
+        {
+          title: "Switch to annual payments and save 50%",
+          body: "Save $198.00/year ($16.50/month) with an annual plan – same unlimited access, half the price.",
+          actions: [
+            {
+              href: withHash(externalUrls.myAccount, "switch-to-annual"),
+              label: "Switch to annual",
+              outlined: true,
+              radius: "8px",
+              variant: "secondary",
+            },
+          ],
+        },
+      ],
+      manageSubscription: sharedManageSubscriptionLinks,
+      copyright:
+        "© 2026 Envato Elements Pty Ltd. Trademarks and brands are the property of their respective owners.",
+    },
   };
 
-  const config = configs[variant];
+  const baseConfig = configs[variant];
+
+  const editableDefaults = useMemo(() => {
+    if (!isCreditsVariant) {
+      return {};
+    }
+    const defaults: Record<string, string> = {
+      [`${variant}.title`]: baseConfig.title,
+    };
+    baseConfig.promoCards.forEach((card, cardIndex) => {
+      defaults[`${variant}.promo.${cardIndex}.title`] = card.title;
+      defaults[`${variant}.promo.${cardIndex}.body`] = card.body;
+      if (card.ctaLabel) {
+        defaults[`${variant}.promo.${cardIndex}.cta`] = card.ctaLabel;
+      }
+      card.actions.forEach((action, actionIndex) => {
+        defaults[`${variant}.promo.${cardIndex}.action.${actionIndex}`] = action.label;
+      });
+    });
+    return defaults;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [baseConfig, isCreditsVariant, variant]);
+
+  useEffect(() => {
+    if (copyRegisterDefaults && Object.keys(editableDefaults).length > 0) {
+      copyRegisterDefaults(editableDefaults);
+    }
+  }, [copyRegisterDefaults, editableDefaults]);
+
+  const t = useCallback(
+    (key: string, fallback: string) =>
+      isCreditsVariant && copyGet ? copyGet(`${variant}.${key}`, fallback) : fallback,
+    [copyGet, isCreditsVariant, variant],
+  );
+
+  const config = useMemo(() => {
+    if (!isCreditsVariant || !copyGet) {
+      return baseConfig;
+    }
+    return {
+      ...baseConfig,
+      title: t("title", baseConfig.title),
+      promoCards: baseConfig.promoCards.map((card, cardIndex) => ({
+        ...card,
+        title: t(`promo.${cardIndex}.title`, card.title),
+        body: t(`promo.${cardIndex}.body`, card.body),
+        ctaLabel: card.ctaLabel
+          ? t(`promo.${cardIndex}.cta`, card.ctaLabel)
+          : card.ctaLabel,
+        actions: card.actions.map((action, actionIndex) => ({
+          ...action,
+          label: t(`promo.${cardIndex}.action.${actionIndex}`, action.label),
+        })),
+      })),
+    };
+  }, [baseConfig, copyGet, isCreditsVariant, t]);
+
   const isAnnualVariant = config.renewalCadence === "annually";
   const hasSingleAnnualHeroCard = isAnnualVariant && config.promoCards.length === 1;
   const topBarUsage = hasTopBarUsageVariant
@@ -1195,7 +1463,9 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
             } ${
               isRefreshedV2Variant ? styles["refreshedV2HeroInner"] : ""
             } ${
-              isPlusMonthlyFamilyVariant ? styles["plusMonthlyHeroInner"] : ""
+              isPlusMonthlyFamilyVariant || isCreditsVariant
+                ? styles["plusMonthlyHeroInner"]
+                : ""
             } ${
               isUltimateMonthlyFamilyVariant ? styles["ultimateMonthlyHeroInner"] : ""
             }`}
@@ -1206,7 +1476,9 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
               } ${
                 isRefreshedV2Variant ? styles["refreshedV2PlanSummary"] : ""
               } ${
-                isPlusMonthlyFamilyVariant ? styles["plusMonthlyPlanSummary"] : ""
+                isPlusMonthlyFamilyVariant || isCreditsVariant
+                  ? styles["plusMonthlyPlanSummary"]
+                  : ""
               } ${
                 isUltimateMonthlyFamilyVariant ? styles["ultimateMonthlyPlanSummary"] : ""
               }`}
@@ -1217,7 +1489,8 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
               <div className={styles["planFeatureBlock"]}>
                 <p className={styles["planFeatureTitle"]}>Includes:</p>
                 <div className={styles["planFeatureSupportingPoints"]}>
-                  {config.planFeature.primaryPoint ? (
+                  {config.planFeature.primaryPoint ||
+                  config.planFeature.creditsBadge ? (
                     <div
                       className={`${styles["planFeatureSupportingPoint"]} ${styles["planFeatureSupportingPointPrimary"]}`}
                     >
@@ -1227,7 +1500,15 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                         <img alt="" className={styles["planFeatureIconImage"]} src={accountAiLabsIcon} />
                       </span>
                       <span>
-                        {config.planFeature.count ? (
+                        {config.planFeature.creditsBadge ? (
+                          <>
+                            <span className={styles["creditsBadge"]}>
+                              {config.planFeature.creditsBadge}
+                            </span>
+                            {config.planFeature.creditsUnit ??
+                              " AI credits per month"}
+                          </>
+                        ) : config.planFeature.count ? (
                           <>
                             <strong>{config.planFeature.count}</strong>
                             {getPrimaryFeatureSuffix(config.planFeature)}
@@ -1269,6 +1550,18 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                 <strong>{config.nextPaymentDate}</strong> {"\u2014"} in{" "}
                 {config.nextPaymentDays} days.
               </p>
+
+              {config.paymentMethod ? (
+                <div className={styles["paymentMethodBlock"]}>
+                  <p className={styles["paymentMethodLabel"]}>Payment method</p>
+                  <div className={styles["paymentMethodRow"]}>
+                    <MastercardMark />
+                    <span className={styles["paymentMethodValue"]}>
+                      {config.paymentMethod.value}
+                    </span>
+                  </div>
+                </div>
+              ) : null}
             </div>
 
             {config.promoCards.length > 0 ? (
@@ -1294,7 +1587,9 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                     ? styles["collapsibleHeroCardsCollapsed"]
                     : ""
                 } ${
-                  isPlusMonthlyFamilyVariant ? styles["plusMonthlyHeroCards"] : ""
+                  isPlusMonthlyFamilyVariant || isCreditsVariant
+                    ? styles["plusMonthlyHeroCards"]
+                    : ""
                 } ${
                   isUltimateMonthlyFamilyVariant ? styles["ultimateMonthlyHeroCards"] : ""
                 } ${
@@ -1308,11 +1603,13 @@ export function AccountManagementPage({ variant = "core-monthly" }: Props) {
                     hideUsage={hasTopBarUsageVariant}
                     isUsageExpanded={isAltUsageExpanded}
                     key={card.title}
+                    onPrimaryAction={onPrimaryPromoAction}
                     onToggleUsage={
                       isAltVariant
                         ? () => setIsAltUsageExpanded((current) => !current)
                         : undefined
                     }
+                    usesCredits={config.usesCredits}
                   />
                 ))}
               </div>
