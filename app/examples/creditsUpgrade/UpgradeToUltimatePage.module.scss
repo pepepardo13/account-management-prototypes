@@ -1,0 +1,329 @@
+.page {
+  background: #f3f3f3;
+  color: #191919;
+  font-family: "PolySans", sans-serif;
+  min-height: 100vh;
+}
+
+.topBar {
+  background: #191919;
+  color: #ffffff;
+}
+
+.topBarInner {
+  align-items: center;
+  display: flex;
+  height: 64px;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 0 24px;
+}
+
+.logoLink img {
+  display: block;
+  height: 20px;
+}
+
+.profileButton {
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  gap: 8px;
+}
+
+.main {
+  margin: 0 auto;
+  max-width: 760px;
+  padding: 32px 24px 80px;
+}
+
+.backButton {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  height: 40px;
+  justify-content: center;
+  margin-bottom: 24px;
+  width: 40px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 24px;
+}
+
+.infoBanner {
+  align-items: flex-start;
+  background: #e8eefc;
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+  padding: 16px;
+}
+
+.bannerTitle {
+  font-size: 14px;
+  margin: 0 0 4px;
+}
+
+.bannerBody {
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.section {
+  margin-bottom: 28px;
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+
+.subheading {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.helper {
+  color: #555555;
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 0 0 12px;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdownTrigger {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  justify-content: space-between;
+  padding: 14px 16px;
+  width: 100%;
+}
+
+.dropdownMenu {
+  background: #ffffff;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(25, 25, 25, 0.12);
+  margin-top: 4px;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  z-index: 5;
+}
+
+.dropdownOption {
+  background: #ffffff;
+  border: none;
+  border-bottom: 1px solid #efefef;
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  justify-content: space-between;
+  padding: 14px 16px;
+  text-align: left;
+  width: 100%;
+}
+
+.dropdownOption:last-child {
+  border-bottom: none;
+}
+
+.dropdownOptionSelected {
+  background: #f3f3f3;
+}
+
+.dropdownPrice {
+  color: #555555;
+  white-space: nowrap;
+}
+
+.fixedCreditsBox {
+  align-items: center;
+  background: #e8e8e8;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  min-height: 56px;
+  padding: 16px;
+  text-align: center;
+}
+
+.billingGrid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.billingCard {
+  align-items: flex-start;
+  background: #ffffff;
+  border: 1px solid #cfcfcf;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  text-align: left;
+}
+
+.billingCardSelected {
+  border: 2px solid #191919;
+}
+
+.radio {
+  border: 2px solid #999999;
+  border-radius: 999px;
+  flex: 0 0 18px;
+  height: 18px;
+  margin-top: 2px;
+  width: 18px;
+}
+
+.radioSelected {
+  background: #191919;
+  border-color: #191919;
+  box-shadow: inset 0 0 0 3px #ffffff;
+}
+
+.billingCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.billingCardTitleRow {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
+.savePill {
+  background: #87e64b;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+}
+
+.billingHelper {
+  color: #666666;
+  font-size: 13px;
+}
+
+.paymentRow {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.paymentCard {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.mastercard {
+  display: inline-flex;
+  height: 18px;
+  position: relative;
+  width: 28px;
+}
+
+.mastercardLeft,
+.mastercardRight {
+  border-radius: 50%;
+  height: 18px;
+  position: absolute;
+  top: 0;
+  width: 18px;
+}
+
+.mastercardLeft {
+  background: #eb001b;
+  left: 0;
+}
+
+.mastercardRight {
+  background: #f79e1b;
+  left: 10px;
+  opacity: 0.9;
+}
+
+.summaryRow {
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.summaryRow small {
+  color: #666666;
+  display: block;
+  margin-top: 2px;
+}
+
+.summaryTotal {
+  font-weight: 700;
+}
+
+.summaryCredit {
+  color: #1f7a3f;
+}
+
+.summaryNote {
+  color: #666666;
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 4px 0 20px;
+}
+
+.startRow {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  max-width: 360px;
+}
+
+@media (max-width: 720px) {
+  .billingGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .paymentRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

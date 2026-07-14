@@ -1,0 +1,333 @@
+.page {
+  background: #f6f4ef;
+  color: #191919;
+  font-family: "PolySans", sans-serif;
+  min-height: 100vh;
+}
+
+.topBar {
+  background: #191919;
+  color: #ffffff;
+}
+
+.topBarInner {
+  align-items: center;
+  display: flex;
+  height: 64px;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 0 40px;
+}
+
+.logoLink img {
+  display: block;
+  height: 20px;
+}
+
+.profileButton {
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  gap: 8px;
+}
+
+.heroSection {
+  padding: 48px 40px 56px;
+}
+
+.heroInner {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.planSummary {
+  flex: 1 1 520px;
+  max-width: 560px;
+}
+
+.eyebrow {
+  color: #666666;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.pageTitle {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 20px;
+}
+
+.includesBlock {
+  margin-bottom: 24px;
+}
+
+.includesLabel {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.includesList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.includesItem {
+  align-items: flex-start;
+  display: flex;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.checkIcon {
+  flex: 0 0 20px;
+  height: 20px;
+  margin-top: 1px;
+  width: 20px;
+}
+
+.creditsPill {
+  align-items: center;
+  background: #191919;
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 8px;
+  line-height: 1;
+  padding: 8px 14px 8px 10px;
+}
+
+.pillIcon {
+  filter: brightness(0) invert(1);
+  height: 16px;
+  width: 16px;
+}
+
+.renewal {
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0 0 24px;
+  max-width: 520px;
+}
+
+.inlinePayment {
+  margin-top: 8px;
+}
+
+.inlinePaymentLabel {
+  color: #666666;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.inlinePaymentRow {
+  align-items: center;
+  display: flex;
+  font-size: 15px;
+  gap: 10px;
+}
+
+.mastercard {
+  display: inline-flex;
+  height: 18px;
+  position: relative;
+  width: 28px;
+}
+
+.mastercardLeft,
+.mastercardRight {
+  border-radius: 50%;
+  height: 18px;
+  position: absolute;
+  top: 0;
+  width: 18px;
+}
+
+.mastercardLeft {
+  background: #eb001b;
+  left: 0;
+}
+
+.mastercardRight {
+  background: #f79e1b;
+  left: 10px;
+  opacity: 0.9;
+}
+
+.heroCards {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 16px;
+}
+
+.promoCard {
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+  padding: 20px;
+  width: 280px;
+}
+
+.promoCardPrimary {
+  border: 1px solid #191919;
+  border-radius: 8px;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+
+.usageMeter {
+  margin-bottom: 16px;
+}
+
+.usageMeta {
+  margin-bottom: 8px;
+}
+
+.usageMeta strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.progressTrack {
+  background: #e8e8e8;
+  border-radius: 999px;
+  height: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.progressFill {
+  background: #87e64b;
+  height: 100%;
+}
+
+.usageDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.usageDetailRow {
+  color: #666666;
+  display: flex;
+  font-size: 13px;
+  justify-content: space-between;
+}
+
+.cardCopy {
+  color: #333333;
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.textLink {
+  background: none;
+  border: none;
+  color: #191919;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.cardSpacer {
+  flex: 1;
+  min-height: 16px;
+}
+
+.cardActions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.outlinedButton :global(button) {
+  border-radius: 8px;
+}
+
+.bodyPanel {
+  background: #ffffff;
+  border-radius: 24px 24px 0 0;
+  margin-top: -8px;
+  padding: 40px;
+}
+
+.bodyInner {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.actionsGrid {
+  display: grid;
+  gap: 48px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.actionsList {
+  border-top: 1px solid #e6e6e6;
+}
+
+.actionItem {
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #e6e6e6;
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  justify-content: space-between;
+  padding: 16px 0;
+  text-align: left;
+  width: 100%;
+}
+
+.actionItemContent {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 1100px) {
+  .heroInner {
+    flex-direction: column;
+  }
+
+  .heroCards {
+    flex-wrap: wrap;
+  }
+
+  .actionsGrid {
+    grid-template-columns: 1fr;
+  }
+}

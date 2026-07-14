@@ -1,0 +1,76 @@
+.overlay {
+  align-items: center;
+  background: rgba(25, 25, 25, 0.7);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 24px;
+  position: fixed;
+  z-index: 50;
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  width: min(700px, 100%);
+}
+
+.inner {
+  padding: 24px 40px 40px;
+}
+
+.topRow {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.badge {
+  align-items: center;
+  background: #87e64b;
+  border-radius: 999px;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.title {
+  font-family: "PolySans", sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 12px;
+  max-width: 520px;
+}
+
+.body {
+  color: #333333;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 28px;
+}
+
+.doneButton {
+  max-width: 160px;
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 24px;
+    max-width: none;
+  }
+}
