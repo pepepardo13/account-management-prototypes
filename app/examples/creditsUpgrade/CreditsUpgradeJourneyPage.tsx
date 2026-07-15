@@ -17,7 +17,10 @@ import {
   usePrototypeCopy,
 } from "./prototypeCopy/PrototypeCopyContext.tsx";
 import { PrototypeCopyPalette } from "./prototypeCopy/PrototypeCopyPanel.tsx";
-import { UpgradeToUltimatePage } from "./UpgradeToUltimatePage.tsx";
+import {
+  UpgradeToUltimatePage,
+  type BillingCycle,
+} from "./UpgradeToUltimatePage.tsx";
 
 type Screen = "overview" | "upgrade";
 
@@ -88,6 +91,11 @@ function CreditsUpgradeJourneyInner({ journeyId }: Props) {
   const [selectedCredits, setSelectedCredits] = useState<CreditTiers>(
     entryJourney.defaultSelectedCredits,
   );
+  // The billing cadence the user has committed to. Once they complete an upgrade
+  // on the annual cycle, the overview shows the annual subscription (and drops
+  // the "Switch to annual" upsell).
+  const [appliedBillingCycle, setAppliedBillingCycle] =
+    useState<BillingCycle>("monthly");
   const [successOpen, setSuccessOpen] = useState(false);
   const { getCopy, registerDefaults, setScope } = usePrototypeCopy();
 
@@ -111,8 +119,9 @@ function CreditsUpgradeJourneyInner({ journeyId }: Props) {
     }
   }, [activeJourney, appliedCredits, screen, selectedCredits, setScope]);
 
-  const handleConfirm = (credits: CreditTiers) => {
+  const handleConfirm = (credits: CreditTiers, billingCycle: BillingCycle) => {
     setSelectedCredits(credits);
+    setAppliedBillingCycle(billingCycle);
     setSuccessOpen(true);
   };
 
@@ -135,6 +144,7 @@ function CreditsUpgradeJourneyInner({ journeyId }: Props) {
         style={{ display: screen === "overview" ? undefined : "none" }}
       >
         <AccountManagementPage
+          billingCadence={appliedBillingCycle === "annual" ? "annually" : "monthly"}
           copyGet={getCopy}
           copyRegisterDefaults={registerDefaults}
           disableHubRedirect

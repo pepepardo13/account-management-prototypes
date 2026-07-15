@@ -104,6 +104,12 @@ type Props = {
   disableHubRedirect?: boolean;
   copyGet?: (key: string, fallback: string) => string;
   copyRegisterDefaults?: (defaults: Record<string, string>) => void;
+  /**
+   * Billing cadence for the credits journeys. When "annually" the account is
+   * shown as an annual subscription, so the "Switch to annual" upsell promo is
+   * removed (matching the Figma annual overview).
+   */
+  billingCadence?: "monthly" | "annually";
 };
 
 type UsageInfo = NonNullable<PromoCard["usage"]>;
@@ -413,6 +419,7 @@ export function AccountManagementPage({
   disableHubRedirect = false,
   copyGet,
   copyRegisterDefaults,
+  billingCadence = "monthly",
 }: Props) {
   const externalUrls = useExternalUrls();
   const [isAltUsageExpanded, setIsAltUsageExpanded] = useState(false);
@@ -868,7 +875,7 @@ export function AccountManagementPage({
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
+          body: "Get more AI credits by upgrading your plan.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -909,7 +916,7 @@ export function AccountManagementPage({
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
+          body: "Get more AI credits by upgrading your plan.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -954,7 +961,7 @@ export function AccountManagementPage({
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
+          body: "Get more AI credits by upgrading your plan.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -999,7 +1006,7 @@ export function AccountManagementPage({
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
+          body: "Get more AI credits by upgrading your plan.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -1027,7 +1034,7 @@ export function AccountManagementPage({
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
+          body: "Get more AI credits by upgrading your plan.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -1059,7 +1066,7 @@ export function AccountManagementPage({
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
+          body: "Get more AI credits by upgrading your plan.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -1184,7 +1191,7 @@ export function AccountManagementPage({
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
+          body: "Get more AI credits by upgrading your plan.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -1224,7 +1231,7 @@ export function AccountManagementPage({
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
+          body: "Get more AI credits by upgrading your plan.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -1264,7 +1271,7 @@ export function AccountManagementPage({
       promoCards: [
         {
           title: "Elevate your plan!",
-          body: "Upgrade to the Ultimate plan and unlock unlimited generations.",
+          body: "Get more AI credits by upgrading your plan.",
           ctaHref: pricingUrl,
           ctaLabel: "Explore more",
           emphasized: true,
@@ -1366,27 +1373,42 @@ export function AccountManagementPage({
     [copyGet, isCreditsVariant, variant],
   );
 
+  const isAnnualBilling = billingCadence === "annually";
+
   const config = useMemo(() => {
     if (!isCreditsVariant || !copyGet) {
       return baseConfig;
     }
+    const mappedPromoCards = baseConfig.promoCards.map((card, cardIndex) => ({
+      ...card,
+      title: t(`promo.${cardIndex}.title`, card.title),
+      body: t(`promo.${cardIndex}.body`, card.body),
+      ctaLabel: card.ctaLabel
+        ? t(`promo.${cardIndex}.cta`, card.ctaLabel)
+        : card.ctaLabel,
+      actions: card.actions.map((action, actionIndex) => ({
+        ...action,
+        label: t(`promo.${cardIndex}.action.${actionIndex}`, action.label),
+      })),
+    }));
+
+    // On an annual subscription the "Switch to annual payments" upsell no longer
+    // applies, so drop that promo card entirely.
+    const promoCards = isAnnualBilling
+      ? mappedPromoCards.filter(
+          (card) =>
+            !card.actions.some((action) =>
+              action.href?.includes("switch-to-annual"),
+            ),
+        )
+      : mappedPromoCards;
+
     return {
       ...baseConfig,
       title: t("title", baseConfig.title),
-      promoCards: baseConfig.promoCards.map((card, cardIndex) => ({
-        ...card,
-        title: t(`promo.${cardIndex}.title`, card.title),
-        body: t(`promo.${cardIndex}.body`, card.body),
-        ctaLabel: card.ctaLabel
-          ? t(`promo.${cardIndex}.cta`, card.ctaLabel)
-          : card.ctaLabel,
-        actions: card.actions.map((action, actionIndex) => ({
-          ...action,
-          label: t(`promo.${cardIndex}.action.${actionIndex}`, action.label),
-        })),
-      })),
+      promoCards,
     };
-  }, [baseConfig, copyGet, isCreditsVariant, t]);
+  }, [baseConfig, copyGet, isAnnualBilling, isCreditsVariant, t]);
 
   const isAnnualVariant = config.renewalCadence === "annually";
   const hasSingleAnnualHeroCard = isAnnualVariant && config.promoCards.length === 1;
@@ -1459,7 +1481,7 @@ export function AccountManagementPage({
         <section className={styles["heroSection"]}>
           <div
             className={`${styles["heroInner"]} ${
-              isAnnualVariant ? styles["annualHeroInner"] : ""
+              isAnnualVariant && !isCreditsVariant ? styles["annualHeroInner"] : ""
             } ${
               isRefreshedV2Variant ? styles["refreshedV2HeroInner"] : ""
             } ${
@@ -1472,7 +1494,9 @@ export function AccountManagementPage({
           >
             <div
               className={`${styles["planSummary"]} ${
-                hasSingleAnnualHeroCard ? styles["annualPlanSummary"] : ""
+                hasSingleAnnualHeroCard && !isCreditsVariant
+                  ? styles["annualPlanSummary"]
+                  : ""
               } ${
                 isRefreshedV2Variant ? styles["refreshedV2PlanSummary"] : ""
               } ${

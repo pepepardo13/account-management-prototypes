@@ -10,13 +10,13 @@ import { useEditableCopy } from "./prototypeCopy/PrototypeCopyContext.tsx";
 
 import styles from "./UpgradeToUltimatePage.module.scss";
 
-type BillingCycle = "monthly" | "annual";
+export type BillingCycle = "monthly" | "annual";
 
 type Props = {
   journey: JourneyConfig;
   onBack: () => void;
   onCancel: () => void;
-  onConfirm: (credits: CreditTiers) => void;
+  onConfirm: (credits: CreditTiers, billingCycle: BillingCycle) => void;
   selectedCredits: CreditTiers;
   setSelectedCredits: (credits: CreditTiers) => void;
 };
@@ -162,12 +162,9 @@ export function UpgradeToUltimatePage({
   );
   const startRightAway = useEditableCopy(
     `${prefix}.startRightAway`,
-    journey.startRightAwayCopy,
+    `Your Ultimate ${selectedCredits} individual plan will start right away!`,
   );
-  const confirmLabel = useEditableCopy(
-    `${prefix}.confirm`,
-    "Confirm - USD $00.00 Today",
-  );
+  const confirmLabel = useEditableCopy(`${prefix}.confirm`, "Confirm");
   const cancelLabel = useEditableCopy(`${prefix}.cancel`, "Cancel");
   const estimateCopy = useEditableCopy(
     `${prefix}.estimate`,
@@ -414,7 +411,7 @@ export function UpgradeToUltimatePage({
           <div className={styles["actions"]}>
             <span className={styles["confirmButton"]}>
               <Button
-                onClick={() => onConfirm(selectedCredits)}
+                onClick={() => onConfirm(selectedCredits, billingCycle)}
                 size="large"
                 variant="primary"
               >

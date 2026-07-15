@@ -87,7 +87,7 @@ export const journeyConfigs: Record<JourneyId, JourneyConfig> = {
       resetDate: "14 August, 2026",
       elevateTitle: "Elevate your plan!",
       elevateBody:
-        "Upgrade to the Ultimate plan and unlock unlimited generations.",
+        "Get more AI credits by upgrading your plan.",
       elevateCta: "Upgrade to Ultimate",
     },
     destination: {
@@ -99,7 +99,7 @@ export const journeyConfigs: Record<JourneyId, JourneyConfig> = {
       resetDate: "14 August, 2026",
       elevateTitle: "Elevate your plan!",
       elevateBody:
-        "Upgrade to the Ultimate plan and unlock unlimited generations.",
+        "Get more AI credits by upgrading your plan.",
       elevateCta: "Get more AI credits",
     },
   },
@@ -139,7 +139,7 @@ export const journeyConfigs: Record<JourneyId, JourneyConfig> = {
       resetDate: "14 August, 2026",
       elevateTitle: "Elevate your plan!",
       elevateBody:
-        "Upgrade to the Ultimate plan and unlock unlimited generations.",
+        "Get more AI credits by upgrading your plan.",
       elevateCta: "Get more AI credits",
     },
     destination: {
@@ -151,7 +151,7 @@ export const journeyConfigs: Record<JourneyId, JourneyConfig> = {
       resetDate: "14 August, 2026",
       elevateTitle: "Elevate your plan!",
       elevateBody:
-        "Upgrade to the Ultimate plan and unlock unlimited generations.",
+        "Get more AI credits by upgrading your plan.",
       elevateCta: "Get more AI credits",
     },
   },
@@ -186,7 +186,7 @@ export const journeyConfigs: Record<JourneyId, JourneyConfig> = {
       resetDate: "14 August, 2026",
       elevateTitle: "Elevate your plan!",
       elevateBody:
-        "Upgrade to the Ultimate plan and unlock unlimited generations.",
+        "Get more AI credits by upgrading your plan.",
       elevateCta: "Get more AI credits",
     },
     destination: {
@@ -198,7 +198,7 @@ export const journeyConfigs: Record<JourneyId, JourneyConfig> = {
       resetDate: "14 August, 2026",
       elevateTitle: "Elevate your plan!",
       elevateBody:
-        "Upgrade to the Ultimate plan and unlock unlimited generations.",
+        "Get more AI credits by upgrading your plan.",
       elevateCta: "Get more AI credits",
     },
   },
