@@ -551,6 +551,21 @@
   width: auto;
 }
 
+/*
+ * Single-card overview (e.g. the annual plans, where the "Switch to annual"
+ * upsell is removed). The Figma frame centers the plan column + card cluster
+ * with a fixed 40px gap between them, rather than pushing the card to the far
+ * right. Shrink the plan column to its content so the card sits exactly 40px
+ * after it, then center the whole cluster.
+ */
+.page[data-variant^="credits-"] .heroInner:has(.heroCardsSingle) {
+  justify-content: center;
+}
+
+.page[data-variant^="credits-"] .heroInner:has(.heroCardsSingle) .planSummary {
+  flex: 0 1 auto;
+}
+
 .page[data-variant^="credits-"] .plusMonthlyHeroCards {
   gap: 40px;
   grid-template-columns: repeat(2, 365px);
