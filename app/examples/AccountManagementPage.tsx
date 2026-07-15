@@ -349,13 +349,13 @@ function PromoCardView({
             <div className={styles["usageDetails"]}>
               <div className={styles["usageDetailRow"]}>
                 <span className={styles["usageDetailText"]}>
-                  Total {usesCredits ? "credits" : "generations"} per month
+                  Total {usesCredits ? "AI credits" : "generations"} per month
                 </span>
                 <span className={styles["usageDetailText"]}>{card.usage.total}</span>
               </div>
               <div className={styles["usageDetailRow"]}>
                 <span className={styles["usageDetailText"]}>
-                  {usesCredits ? "Credits reset" : "Generations resets"}
+                  {usesCredits ? "AI credits reset" : "Generations resets"}
                 </span>
                 <span className={styles["usageDetailText"]}>{card.usage.resetDate}</span>
               </div>
