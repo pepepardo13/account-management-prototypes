@@ -41,14 +41,6 @@ export function PlanUpdateSuccessModal({ isOpen, onDismiss, onDone }: Props) {
             <div className={styles["badge"]}>
               <Icon name="done" size="1x" />
             </div>
-            <button
-              aria-label="Close"
-              className={styles["closeButton"]}
-              onClick={onDismiss}
-              type="button"
-            >
-              <Icon name="clear" size="1x" />
-            </button>
           </div>
 
           <h2 className={styles["title"]}>{title}</h2>

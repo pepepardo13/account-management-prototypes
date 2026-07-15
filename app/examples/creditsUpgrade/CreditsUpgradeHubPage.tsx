@@ -23,6 +23,21 @@ const journeyCards: JourneyCard[] = [
     period: "Monthly",
     href: "./iframe.html?id=layout-credits-upgrade-journeys--ultimate-1000-to-2000&viewMode=story",
   },
+  {
+    name: "Plus Individual → Ultimate 2000",
+    period: "Annual",
+    href: "./iframe.html?id=layout-credits-upgrade-journeys--annual-plus-to-ultimate-2000&viewMode=story",
+  },
+  {
+    name: "Ultimate 1000 → Ultimate 2000",
+    period: "Annual",
+    href: "./iframe.html?id=layout-credits-upgrade-journeys--annual-ultimate-1000-to-2000&viewMode=story",
+  },
+  {
+    name: "Ultimate 2000",
+    period: "Annual",
+    href: "./iframe.html?id=layout-credits-upgrade-journeys--annual-ultimate-2000&viewMode=story",
+  },
 ];
 
 export function CreditsUpgradeHubPage() {
@@ -37,7 +52,7 @@ export function CreditsUpgradeHubPage() {
 
         <div className={styles["grid"]}>
           {journeyCards.map((card) => (
-            <a className={styles["card"]} href={card.href} key={card.name}>
+            <a className={styles["card"]} href={card.href} key={card.href}>
               <span className={styles["cardTitle"]}>{card.name}</span>
               <span className={styles["cardSubtitle"]}>{card.period}</span>
             </a>

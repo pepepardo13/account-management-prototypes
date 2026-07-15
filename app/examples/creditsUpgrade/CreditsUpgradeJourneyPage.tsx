@@ -26,6 +26,13 @@ type Screen = "overview" | "upgrade";
 
 type Props = {
   journeyId: JourneyId;
+  /** Starting billing cadence. Annual entries begin on the annual cycle. */
+  initialBillingCycle?: BillingCycle;
+  /**
+   * Overrides the starting plan tier (defaults to the entry journey's source).
+   * Used for the top-tier "Ultimate 2000" entry, which has no further upgrade.
+   */
+  initialCredits?: CreditTiers;
 };
 
 const overviewVariantForCredits: Record<CreditTiers, AccountManagementVariant> = {
@@ -82,20 +89,24 @@ function useHubShortcut() {
   }, []);
 }
 
-function CreditsUpgradeJourneyInner({ journeyId }: Props) {
+function CreditsUpgradeJourneyInner({
+  journeyId,
+  initialBillingCycle = "monthly",
+  initialCredits,
+}: Props) {
   const entryJourney = journeyConfigs[journeyId];
   const [screen, setScreen] = useState<Screen>("overview");
   const [appliedCredits, setAppliedCredits] = useState<CreditTiers>(
-    entryJourney.source.creditTotal,
+    initialCredits ?? entryJourney.source.creditTotal,
   );
   const [selectedCredits, setSelectedCredits] = useState<CreditTiers>(
     entryJourney.defaultSelectedCredits,
   );
-  // The billing cadence the user has committed to. Once they complete an upgrade
-  // on the annual cycle, the overview shows the annual subscription (and drops
-  // the "Switch to annual" upsell).
+  // The billing cadence the user has committed to. Annual entries start here,
+  // and once the user completes an upgrade on the annual cycle the overview
+  // shows the annual subscription (and drops the "Switch to annual" upsell).
   const [appliedBillingCycle, setAppliedBillingCycle] =
-    useState<BillingCycle>("monthly");
+    useState<BillingCycle>(initialBillingCycle);
   const [successOpen, setSuccessOpen] = useState(false);
   const { getCopy, registerDefaults, setScope } = usePrototypeCopy();
 
@@ -165,6 +176,7 @@ function CreditsUpgradeJourneyInner({ journeyId }: Props) {
       >
         {activeJourney ? (
           <UpgradeToUltimatePage
+            initialBillingCycle={appliedBillingCycle}
             journey={activeJourney}
             onBack={() => setScreen("overview")}
             onCancel={() => setScreen("overview")}
@@ -186,10 +198,18 @@ function CreditsUpgradeJourneyInner({ journeyId }: Props) {
   );
 }
 
-export function CreditsUpgradeJourneyPage({ journeyId }: Props) {
+export function CreditsUpgradeJourneyPage({
+  journeyId,
+  initialBillingCycle,
+  initialCredits,
+}: Props) {
   return (
     <PrototypeCopyProvider>
-      <CreditsUpgradeJourneyInner journeyId={journeyId} />
+      <CreditsUpgradeJourneyInner
+        initialBillingCycle={initialBillingCycle}
+        initialCredits={initialCredits}
+        journeyId={journeyId}
+      />
     </PrototypeCopyProvider>
   );
 }

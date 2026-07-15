@@ -43,3 +43,28 @@ export const Ultimate1000To2000: Story = {
   name: "Ultimate 1000 → Ultimate 2000",
   render: () => <CreditsUpgradeJourneyPage journeyId="1000-to-2000" />,
 };
+
+export const AnnualPlusToUltimate2000: Story = {
+  name: "Annual Plus Individual → Ultimate 2000",
+  render: () => (
+    <CreditsUpgradeJourneyPage initialBillingCycle="annual" journeyId="plus-to-500" />
+  ),
+};
+
+export const AnnualUltimate1000To2000: Story = {
+  name: "Annual Ultimate 1000 → Ultimate 2000",
+  render: () => (
+    <CreditsUpgradeJourneyPage initialBillingCycle="annual" journeyId="1000-to-2000" />
+  ),
+};
+
+export const AnnualUltimate2000: Story = {
+  name: "Annual Ultimate 2000",
+  render: () => (
+    <CreditsUpgradeJourneyPage
+      initialBillingCycle="annual"
+      initialCredits={2000}
+      journeyId="1000-to-2000"
+    />
+  ),
+};

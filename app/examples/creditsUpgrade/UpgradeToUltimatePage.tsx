@@ -13,6 +13,7 @@ import styles from "./UpgradeToUltimatePage.module.scss";
 export type BillingCycle = "monthly" | "annual";
 
 type Props = {
+  initialBillingCycle?: BillingCycle;
   journey: JourneyConfig;
   onBack: () => void;
   onCancel: () => void;
@@ -109,6 +110,7 @@ function CreditsDropdown({
 }
 
 export function UpgradeToUltimatePage({
+  initialBillingCycle = "monthly",
   journey,
   onBack,
   onCancel,
@@ -117,7 +119,8 @@ export function UpgradeToUltimatePage({
   setSelectedCredits,
 }: Props) {
   const externalUrls = useExternalUrls();
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
+  const [billingCycle, setBillingCycle] =
+    useState<BillingCycle>(initialBillingCycle);
   const prefix = `upgrade.${journey.id}.${selectedCredits}`;
 
   const pageTitle = useEditableCopy(
