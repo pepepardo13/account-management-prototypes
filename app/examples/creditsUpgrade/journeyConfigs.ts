@@ -58,17 +58,17 @@ export const journeyConfigs: Record<JourneyId, JourneyConfig> = {
       {
         credits: 500,
         label: "500 AI credits per month",
-        priceLabel: "USD $39/monthly",
+        priceLabel: "USD $39/month",
       },
       {
         credits: 1000,
         label: "1,000 AI credits per month",
-        priceLabel: "USD $168/monthly",
+        priceLabel: "USD $168/month",
       },
       {
         credits: 2000,
         label: "2,000 AI credits per month",
-        priceLabel: "USD $297/monthly",
+        priceLabel: "USD $297/month",
       },
     ],
     fixedCreditHelper: "",
@@ -114,12 +114,12 @@ export const journeyConfigs: Record<JourneyId, JourneyConfig> = {
       {
         credits: 1000,
         label: "1,000 AI credits per month",
-        priceLabel: "USD $168/monthly",
+        priceLabel: "USD $168/month",
       },
       {
         credits: 2000,
         label: "2,000 AI credits per month",
-        priceLabel: "USD $297/monthly",
+        priceLabel: "USD $297/month",
       },
     ],
     fixedCreditHelper: "",
@@ -166,7 +166,7 @@ export const journeyConfigs: Record<JourneyId, JourneyConfig> = {
       {
         credits: 2000,
         label: "2000 AI credits",
-        priceLabel: "USD $297/monthly",
+        priceLabel: "USD $297/month",
       },
     ],
     fixedCreditHelper:
