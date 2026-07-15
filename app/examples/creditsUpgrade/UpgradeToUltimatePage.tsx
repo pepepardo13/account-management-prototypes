@@ -147,7 +147,7 @@ export function UpgradeToUltimatePage({
     `${prefix}.chooseHelper`,
     journey.creditMode === "fixed"
       ? journey.fixedCreditHelper
-      : "Ultimate scales with how much you create. Pick your monthly AI credits – you can change this anytime",
+      : "Ultimate scales with how much you create. Pick your monthly AI credits – you can change this anytime.",
   );
   const billingHeading = useEditableCopy(
     `${prefix}.billingHeading`,
