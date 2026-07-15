@@ -121,6 +121,9 @@ export function UpgradeToUltimatePage({
   const externalUrls = useExternalUrls();
   const [billingCycle, setBillingCycle] =
     useState<BillingCycle>(initialBillingCycle);
+  // Annual journeys start (and stay) on the annual cycle, so the monthly/annual
+  // billing selector is hidden for that flow.
+  const isAnnualFlow = initialBillingCycle === "annual";
   const prefix = `upgrade.${journey.id}.${selectedCredits}`;
 
   const pageTitle = useEditableCopy(
@@ -299,49 +302,51 @@ export function UpgradeToUltimatePage({
             )}
           </section>
 
-          <section className={styles["section"]}>
-            <h3 className={styles["subheading"]}>{billingHeading}</h3>
-            <div className={styles["billingGrid"]}>
-              <button
-                className={`${styles["billingCard"]} ${
-                  billingCycle === "monthly" ? styles["billingCardSelected"] : ""
-                }`}
-                onClick={() => setBillingCycle("monthly")}
-                type="button"
-              >
-                <span
-                  className={`${styles["radio"]} ${
-                    billingCycle === "monthly" ? styles["radioSelected"] : ""
+          {isAnnualFlow ? null : (
+            <section className={styles["section"]}>
+              <h3 className={styles["subheading"]}>{billingHeading}</h3>
+              <div className={styles["billingGrid"]}>
+                <button
+                  className={`${styles["billingCard"]} ${
+                    billingCycle === "monthly" ? styles["billingCardSelected"] : ""
                   }`}
-                />
-                <span className={styles["billingCardBody"]}>
-                  <strong>{monthlyLabel}</strong>
-                  <span>{monthlyPrice}</span>
-                </span>
-              </button>
-              <button
-                className={`${styles["billingCard"]} ${
-                  billingCycle === "annual" ? styles["billingCardSelected"] : ""
-                }`}
-                onClick={() => setBillingCycle("annual")}
-                type="button"
-              >
-                <span
-                  className={`${styles["radio"]} ${
-                    billingCycle === "annual" ? styles["radioSelected"] : ""
-                  }`}
-                />
-                <span className={styles["billingCardBody"]}>
-                  <span className={styles["billingCardTitleRow"]}>
-                    <strong>{annualLabel}</strong>
-                    <span className={styles["savePill"]}>{saveBadge}</span>
+                  onClick={() => setBillingCycle("monthly")}
+                  type="button"
+                >
+                  <span
+                    className={`${styles["radio"]} ${
+                      billingCycle === "monthly" ? styles["radioSelected"] : ""
+                    }`}
+                  />
+                  <span className={styles["billingCardBody"]}>
+                    <strong>{monthlyLabel}</strong>
+                    <span>{monthlyPrice}</span>
                   </span>
-                  <span>{annualPrice}</span>
-                  <span className={styles["billingHelper"]}>{annualBilled}</span>
-                </span>
-              </button>
-            </div>
-          </section>
+                </button>
+                <button
+                  className={`${styles["billingCard"]} ${
+                    billingCycle === "annual" ? styles["billingCardSelected"] : ""
+                  }`}
+                  onClick={() => setBillingCycle("annual")}
+                  type="button"
+                >
+                  <span
+                    className={`${styles["radio"]} ${
+                      billingCycle === "annual" ? styles["radioSelected"] : ""
+                    }`}
+                  />
+                  <span className={styles["billingCardBody"]}>
+                    <span className={styles["billingCardTitleRow"]}>
+                      <strong>{annualLabel}</strong>
+                      <span className={styles["savePill"]}>{saveBadge}</span>
+                    </span>
+                    <span>{annualPrice}</span>
+                    <span className={styles["billingHelper"]}>{annualBilled}</span>
+                  </span>
+                </button>
+              </div>
+            </section>
+          )}
 
           <section className={styles["section"]}>
             <h3 className={styles["subheading"]}>{paymentHeading}</h3>
