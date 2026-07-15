@@ -1,0 +1,123 @@
+<style>
+  #cam-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #191919;
+    color: #ffffff;
+    font-family: "PolySans", system-ui, -apple-system, sans-serif;
+  }
+  #cam-gate[hidden] {
+    display: none;
+  }
+  #cam-gate .cam-gate-box {
+    width: 340px;
+    max-width: calc(100vw - 48px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  #cam-gate h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+  }
+  #cam-gate p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #cccccc;
+    margin: 0;
+  }
+  #cam-gate form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  #cam-gate input {
+    height: 48px;
+    padding: 0 16px;
+    border: 1px solid #494949;
+    border-radius: 4px;
+    background: #383838;
+    color: #ffffff;
+    font: inherit;
+    font-size: 16px;
+    outline: none;
+  }
+  #cam-gate input:focus {
+    border-color: #9cee69;
+  }
+  #cam-gate button {
+    height: 48px;
+    border: 0;
+    border-radius: 4px;
+    background: #9cee69;
+    color: #191919;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  #cam-gate .cam-gate-error {
+    color: #ff8a8a;
+    font-size: 13px;
+    min-height: 16px;
+  }
+</style>
+<script>
+  (function () {
+    var KEY = "cam-gate-unlocked";
+    var PASS = "CAM2026";
+    try {
+      if (
+        window.localStorage.getItem(KEY) === "1" ||
+        window.sessionStorage.getItem(KEY) === "1"
+      ) {
+        return;
+      }
+    } catch (e) {}
+
+    function build() {
+      if (document.getElementById("cam-gate")) return;
+      var gate = document.createElement("div");
+      gate.id = "cam-gate";
+      gate.innerHTML =
+        '<div class="cam-gate-box">' +
+        "<h1>Protected prototype</h1>" +
+        "<p>Enter the access password to view this prototype.</p>" +
+        '<form><input type="password" autocomplete="off" autofocus placeholder="Password" aria-label="Password" />' +
+        '<div class="cam-gate-error" aria-live="polite"></div>' +
+        "<button type=\"submit\">Unlock</button></form>" +
+        "</div>";
+      (document.body || document.documentElement).appendChild(gate);
+
+      var form = gate.querySelector("form");
+      var input = gate.querySelector("input");
+      var error = gate.querySelector(".cam-gate-error");
+      input.focus();
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (input.value === PASS) {
+          try {
+            window.localStorage.setItem(KEY, "1");
+          } catch (e) {}
+          gate.parentNode.removeChild(gate);
+        } else {
+          error.textContent = "Incorrect password. Please try again.";
+          input.value = "";
+          input.focus();
+        }
+      });
+    }
+
+    if (document.body) {
+      build();
+    } else {
+      document.addEventListener("DOMContentLoaded", build);
+    }
+  })();
+</script>
